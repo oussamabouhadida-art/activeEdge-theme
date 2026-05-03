@@ -80,8 +80,8 @@
   --section-padding: clamp(40px, 6vw, 80px);
   --container-max: 1280px;
   --container-padding: clamp(16px, 4vw, 48px);
-  --header-height: 72px;
-  --announcement-height: 40px;
+  --header-height: 54px;
+  --announcement-height: 34px;
 
   /* Z-index scale */
   --z-below: -1;
