@@ -29,8 +29,7 @@
   <!-- Anti-flash: apply theme before paint -->
   <script>
     (function(){
-      var t=localStorage.getItem('activeedge-theme')||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      var t=localStorage.getItem('activeedge-theme')||'dark';
       document.documentElement.setAttribute('data-theme',t);
     })();
   </script>
