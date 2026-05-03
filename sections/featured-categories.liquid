@@ -9,7 +9,7 @@
       </div>
     {%- endif -%}
 
-    <div class="featured-categories__grid">
+    <div class="featured-categories__grid" data-reveal-stagger=".featured-categories__item" data-reveal-step="70">
       {%- for block in section.blocks -%}
         <div class="featured-categories__item" {{ block.shopify_attributes }}>
           <a href="{{ block.settings.link }}" class="featured-categories__link">

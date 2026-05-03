@@ -1,16 +1,13 @@
-<section class="lifestyle-split section-padding">
+<section class="lifestyle-split">
   {%- for block in section.blocks -%}
     {%- assign is_reversed = block.settings.image_position == 'right' -%}
     <div class="lifestyle-split__row{% if is_reversed %} lifestyle-split__row--reversed{% endif %}" {{ block.shopify_attributes }}>
-      <div class="lifestyle-split__media">
+
+      <div class="lifestyle-split__media" data-reveal="{% if is_reversed %}slide-left{% else %}slide-right{% endif %}">
         {%- if block.settings.image != blank -%}
           <img
             src="{{ block.settings.image | image_url: width: 900 }}"
-            srcset="
-              {{ block.settings.image | image_url: width: 600 }} 600w,
-              {{ block.settings.image | image_url: width: 900 }} 900w,
-              {{ block.settings.image | image_url: width: 1200 }} 1200w
-            "
+            srcset="{{ block.settings.image | image_url: width: 600 }} 600w, {{ block.settings.image | image_url: width: 900 }} 900w, {{ block.settings.image | image_url: width: 1200 }} 1200w"
             sizes="(min-width: 768px) 50vw, 100vw"
             alt="{{ block.settings.image.alt | default: block.settings.heading }}"
             class="lifestyle-split__image"
@@ -22,7 +19,7 @@
       </div>
 
       <div class="lifestyle-split__content">
-        <div class="lifestyle-split__inner">
+        <div class="lifestyle-split__inner" data-reveal="fade-up" data-reveal-delay="150">
           {%- if block.settings.eyebrow != blank -%}
             <p class="lifestyle-split__eyebrow">{{ block.settings.eyebrow }}</p>
           {%- endif -%}
@@ -32,13 +29,14 @@
           {%- if block.settings.text != blank -%}
             <div class="lifestyle-split__text rte">{{ block.settings.text }}</div>
           {%- endif -%}
-          {%- if block.settings.cta_label != blank and block.settings.cta_url != blank -%}
-            <a href="{{ block.settings.cta_url }}" class="btn btn--primary lifestyle-split__cta">
+          {%- if block.settings.cta_label != blank -%}
+            <a href="{{ block.settings.cta_url | default: '/collections/all' }}" class="btn btn--primary lifestyle-split__cta btn--magnetic">
               {{ block.settings.cta_label }}
             </a>
           {%- endif -%}
         </div>
       </div>
+
     </div>
   {%- endfor -%}
 </section>

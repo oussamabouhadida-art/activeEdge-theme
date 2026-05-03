@@ -3,10 +3,32 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "message": "🌿 Livraison offerte dès 35 € — France & Europe",
+        "show_announcement": true,
+        "default_text": "🌿 Livraison offerte dès 35 € — France & Europe",
         "background_color": "#2D6A4F",
         "text_color": "#FFFFFF"
-      }
+      },
+      "blocks": {
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "🌿 Livraison offerte dès 35 € — France & Europe"
+          }
+        },
+        "announcement-2": {
+          "type": "announcement",
+          "settings": {
+            "text": "🔄 Retours gratuits sous 30 jours"
+          }
+        },
+        "announcement-3": {
+          "type": "announcement",
+          "settings": {
+            "text": "⭐ 4.9/5 sur 1 248 avis vérifiés"
+          }
+        }
+      },
+      "block_order": ["announcement-1", "announcement-2", "announcement-3"]
     },
     "hero": {
       "type": "hero",
@@ -29,51 +51,237 @@
       "settings": {
         "heading": "Nos univers",
         "subheading": "Des accessoires pour chaque moment de ton quotidien actif."
-      }
+      },
+      "blocks": {
+        "cat-running": {
+          "type": "category",
+          "settings": {
+            "title": "Running",
+            "subtitle": "Sacs, ceintures, accessoires",
+            "cta": "Explorer",
+            "link": "/collections/running"
+          }
+        },
+        "cat-urban": {
+          "type": "category",
+          "settings": {
+            "title": "Mobilité urbaine",
+            "subtitle": "Trottinette, vélo, ville",
+            "cta": "Explorer",
+            "link": "/collections/urban"
+          }
+        },
+        "cat-wellness": {
+          "type": "category",
+          "settings": {
+            "title": "Wellness",
+            "subtitle": "Récupération & mindset",
+            "cta": "Explorer",
+            "link": "/collections/wellness"
+          }
+        },
+        "cat-everyday": {
+          "type": "category",
+          "settings": {
+            "title": "Quotidien actif",
+            "subtitle": "Pour bouger sans y penser",
+            "cta": "Explorer",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": ["cat-running", "cat-urban", "cat-wellness", "cat-everyday"]
     },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
         "heading": "Nos best-sellers",
         "subheading": "Les accessoires préférés de la communauté ActiveEdge.",
-        "collection": "all",
-        "products_per_row": 4,
-        "show_view_all": true
+        "products_count": 6,
+        "show_view_all": true,
+        "show_quick_add": true
       }
     },
     "why-activeedge": {
       "type": "why-activeedge",
       "settings": {
         "heading": "Pourquoi ActiveEdge ?",
-        "subheading": "Des produits pensés pour bouger léger au quotidien."
-      }
+        "subheading": "Des produits pensés pour bouger léger au quotidien.",
+        "background_color": "#F0FAF5"
+      },
+      "blocks": {
+        "why-eco": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Éco-responsable",
+            "text": "Matériaux durables, emballages recyclables, fabrication raisonnée."
+          }
+        },
+        "why-shipping": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "Livraison rapide",
+            "text": "Expédition en 24h, livraison 2–3 jours ouvrés en France et Europe."
+          }
+        },
+        "why-returns": {
+          "type": "feature",
+          "settings": {
+            "icon": "return",
+            "title": "Retours faciles",
+            "text": "30 jours pour changer d'avis — sans justificatif, sans friction."
+          }
+        },
+        "why-quality": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "title": "Qualité testée",
+            "text": "Chaque produit est validé par notre communauté d'actifs avant le lancement."
+          }
+        }
+      },
+      "block_order": ["why-eco", "why-shipping", "why-returns", "why-quality"]
     },
     "lifestyle-split": {
       "type": "lifestyle-split",
-      "settings": {
-        "heading": "Le mouvement, au quotidien",
-        "text": "ActiveEdge est né d'une conviction simple : bouger mieux ne devrait pas être compliqué. Nos accessoires s'intègrent naturellement dans ta vie — running matinal, trajet urbain, séance de récup. Légers, pensés, avec toi.",
-        "cta_label": "Notre histoire",
-        "cta_url": "/pages/about",
-        "image_position": "right"
-      }
+      "settings": {},
+      "blocks": {
+        "split-vision": {
+          "type": "split_row",
+          "settings": {
+            "eyebrow": "Notre vision",
+            "heading": "Fabriqué pour ceux qui bougent",
+            "text": "<p>Chaque détail compte quand tu es en mouvement. ActiveEdge conçoit des accessoires qui disparaissent dans ta pratique — pour que tu te concentres sur l'essentiel.</p>",
+            "cta_label": "Notre histoire",
+            "cta_url": "/pages/about",
+            "image_position": "right"
+          }
+        }
+      },
+      "block_order": ["split-vision"]
     },
     "social-proof": {
       "type": "social-proof",
       "settings": {
         "heading": "Ils bougent avec ActiveEdge",
-        "subheading": "Des milliers de clients actifs font confiance à nos accessoires."
-      }
+        "subheading": "Des milliers de clients actifs font confiance à nos accessoires.",
+        "rating": "4.9",
+        "rating_count": "1 248",
+        "background_color": "#FFFFFF"
+      },
+      "blocks": {
+        "review-1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Franchement bluffant. Je cours tous les matins avec ma ceinture ActiveEdge — elle ne bouge pas d'un millimètre et ça change tout.",
+            "name": "Sophie M.",
+            "location": "Lyon, France",
+            "verified": true
+          }
+        },
+        "review-2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Le sac de running est parfait pour mes trajets vélo aussi. Compact, solide, et il ne prend pas l'eau. Je recommande sans hésiter.",
+            "name": "Thomas K.",
+            "location": "Paris, France",
+            "verified": true
+          }
+        },
+        "review-3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Livraison ultra rapide et produit exactement comme décrit. L'équipe a répondu en 2h quand j'avais une question. Service impeccable.",
+            "name": "Camille R.",
+            "location": "Bordeaux, France",
+            "verified": true
+          }
+        },
+        "review-4": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "J'utilisais des marques à 3x le prix avant. ActiveEdge c'est la même qualité pour bien moins cher. Converti définitivement.",
+            "name": "Marc D.",
+            "location": "Nantes, France",
+            "verified": true
+          }
+        },
+        "review-5": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Le design est vraiment soigné, pas trop sportif pour porter en ville. Et les matières sont agréables au toucher. Parfait.",
+            "name": "Léa P.",
+            "location": "Montpellier, France",
+            "verified": true
+          }
+        },
+        "review-6": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "quote": "Très bon produit, utilisation quotidienne depuis 6 mois et aucun signe d'usure. Tient vraiment ses promesses dans la durée.",
+            "name": "Antoine B.",
+            "location": "Strasbourg, France",
+            "verified": true
+          }
+        }
+      },
+      "block_order": ["review-1", "review-2", "review-3", "review-4", "review-5", "review-6"]
     },
     "trust-bar": {
       "type": "trust-bar",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "trust-shipping": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "label": "Livraison gratuite",
+            "sublabel": "Dès 35€ d'achat"
+          }
+        },
+        "trust-returns": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "return",
+            "label": "Retours 30 jours",
+            "sublabel": "Sans conditions"
+          }
+        },
+        "trust-eco": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "leaf",
+            "label": "Éco-responsable",
+            "sublabel": "Matériaux durables"
+          }
+        },
+        "trust-rating": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "star",
+            "label": "4.9 / 5",
+            "sublabel": "1 248 avis vérifiés"
+          }
+        }
+      },
+      "block_order": ["trust-shipping", "trust-returns", "trust-eco", "trust-rating"]
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
         "heading": "Rejoins la communauté ActiveEdge",
-        "subheading": "Conseils mouvement, nouveautés et offres exclusives — directement dans ta boîte mail."
+        "subheading": "Conseils mouvement, nouveautés et offres exclusives — directement dans ta boîte mail.",
+        "button_label": "Je m'inscris",
+        "disclaimer": "Pas de spam. Désabonnement en 1 clic."
       }
     }
   },

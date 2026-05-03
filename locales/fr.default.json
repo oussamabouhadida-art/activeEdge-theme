@@ -24,7 +24,9 @@
     "plus": "plus"
   },
   "accessibility": {
-    "skip_to_content": "Passer au contenu principal"
+    "skip_to_content": "Passer au contenu principal",
+    "previous": "Précédent",
+    "next": "Suivant"
   },
   "header": {
     "cart": "Panier",

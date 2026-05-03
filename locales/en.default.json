@@ -24,7 +24,9 @@
     "plus": "plus"
   },
   "accessibility": {
-    "skip_to_content": "Skip to main content"
+    "skip_to_content": "Skip to main content",
+    "previous": "Previous",
+    "next": "Next"
   },
   "header": {
     "cart": "Cart",
