@@ -1,0 +1,164 @@
+<div class="collection-page">
+  <!-- Collection hero -->
+  <div class="collection-hero">
+    {%- if collection.image -%}
+      <div class="collection-hero__media">
+        <img
+          src="{{ collection.image | image_url: width: 1920 }}"
+          alt="{{ collection.image.alt | default: collection.title }}"
+          class="collection-hero__image"
+          loading="eager"
+          fetchpriority="high"
+        >
+        <div class="collection-hero__overlay"></div>
+      </div>
+    {%- endif -%}
+    <div class="collection-hero__content page-width">
+      {%- render 'breadcrumb' -%}
+      <h1 class="collection-hero__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="collection-hero__description rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="collection-toolbar page-width">
+    <p class="collection-toolbar__count">
+      {{ 'sections.collection.product_count' | t: count: collection.products_count }}
+    </p>
+
+    <div class="collection-toolbar__controls">
+      <!-- Filter toggle (mobile) -->
+      <button class="collection-toolbar__filter-btn" id="filter-toggle" aria-expanded="false">
+        {{ 'sections.collection.filter' | t }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+      </button>
+
+      <!-- Sort -->
+      <div class="collection-toolbar__sort">
+        <label for="sort-by" class="visually-hidden">{{ 'sections.collection.sort_by_label' | t }}</label>
+        <select id="sort-by" name="sort_by" class="sort-select" aria-label="{{ 'sections.collection.sort_by_label' | t }}">
+          {%- for option in collection.sort_options -%}
+            <option value="{{ option.value }}"{% if option.value == collection.sort_by %} selected{% endif %}>
+              {{ option.name }}
+            </option>
+          {%- endfor -%}
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content: filters + grid -->
+  <div class="collection-layout page-width">
+
+    <!-- Filters sidebar -->
+    {%- if section.settings.show_filters -%}
+      <aside class="collection-filters" id="collection-filters" aria-label="{{ 'sections.collection.filter' | t }}">
+        {%- for filter in collection.filters -%}
+          <div class="filter-group" data-filter-type="{{ filter.type }}">
+            <button class="filter-group__toggle" aria-expanded="true">
+              {{ filter.label }}
+              {%- render 'icon-chevron' -%}
+            </button>
+            <div class="filter-group__options">
+              {%- if filter.type == 'price_range' -%}
+                <div class="filter-price-range">
+                  <input
+                    type="number"
+                    name="{{ filter.min_value.param_name }}"
+                    value="{{ filter.min_value.value | divided_by: 100 }}"
+                    min="0"
+                    placeholder="{{ 'sections.collection.price_min' | t }}"
+                    class="filter-price-range__input"
+                  >
+                  <span>–</span>
+                  <input
+                    type="number"
+                    name="{{ filter.max_value.param_name }}"
+                    value="{{ filter.max_value.value | divided_by: 100 }}"
+                    max="{{ filter.range_max | divided_by: 100 }}"
+                    placeholder="{{ 'sections.collection.price_max' | t }}"
+                    class="filter-price-range__input"
+                  >
+                </div>
+              {%- else -%}
+                <ul class="filter-list" role="list">
+                  {%- for value in filter.values -%}
+                    <li class="filter-list__item">
+                      <label class="filter-list__label">
+                        <input
+                          type="checkbox"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          {% if value.active %}checked{% endif %}
+                          class="filter-list__checkbox"
+                        >
+                        <span class="filter-list__text">{{ value.label }}</span>
+                        <span class="filter-list__count">({{ value.count }})</span>
+                      </label>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </aside>
+    {%- endif -%}
+
+    <!-- Product grid -->
+    <div class="collection-grid" id="product-grid">
+      {%- paginate collection.products by section.settings.products_per_page -%}
+        <div class="collection-grid__inner">
+          {%- if collection.products.size > 0 -%}
+            {%- for product in collection.products -%}
+              <div class="collection-grid__item">
+                {%- render 'product-card', product: product, show_quick_add: section.settings.show_quick_add -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <div class="collection-empty">
+              <p>{{ 'sections.collection.empty' | t }}</p>
+              <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">
+                {{ 'general.continue_shopping' | t }}
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- render 'pagination', paginate: paginate -%}
+      {%- endpaginate -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection page",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show filters sidebar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "Show quick add button",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

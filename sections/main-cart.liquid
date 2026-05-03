@@ -1,0 +1,57 @@
+<div class="cart-page page-width page-section">
+  <h1 class="heading-lg">{{ 'sections.cart.title' | t }}</h1>
+
+  {%- if cart.item_count > 0 -%}
+    <div class="cart-page__layout">
+      <div class="cart-page__items">
+        {%- for item in cart.items -%}
+          {%- render 'cart-item', item: item -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="cart-page__summary">
+        <div class="cart-summary">
+          <h2 class="cart-summary__title">{{ 'sections.cart.order_summary' | t }}</h2>
+
+          <div class="cart-summary__row">
+            <span>{{ 'sections.cart.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+
+          {%- if cart.total_discount > 0 -%}
+            <div class="cart-summary__row cart-summary__row--discount">
+              <span>{{ 'sections.cart.discount' | t }}</span>
+              <span>-{{ cart.total_discount | money }}</span>
+            </div>
+          {%- endif -%}
+
+          <p class="cart-summary__shipping-note">{{ 'sections.cart.shipping_note' | t }}</p>
+
+          <form action="{{ routes.cart_url }}" method="post" novalidate>
+            <button type="submit" name="checkout" class="btn btn--primary btn--full btn--large">
+              {{ 'sections.cart.checkout' | t }}
+            </button>
+          </form>
+
+          <a href="{{ routes.all_products_collection_url }}" class="cart-summary__continue-link">
+            {{ 'general.continue_shopping' | t }}
+          </a>
+        </div>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="cart-empty">
+      <p class="cart-empty__message">{{ 'sections.cart.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">
+        {{ 'general.continue_shopping' | t }}
+      </a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "settings": []
+}
+{% endschema %}

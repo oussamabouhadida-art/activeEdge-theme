@@ -1,0 +1,21 @@
+{
+  "current": {
+    "colors_accent_1": "#52B788",
+    "colors_accent_2": "#2D6A4F",
+    "colors_background_1": "#FFFFFF",
+    "colors_background_2": "#F0FAF5",
+    "colors_text": "#1A1A1A",
+    "type_header_font": "montserrat_n7",
+    "type_body_font": "inter_n4",
+    "favicon": "",
+    "social_twitter_link": "",
+    "social_facebook_link": "",
+    "social_instagram_link": "https://instagram.com/activeedge",
+    "social_youtube_link": "",
+    "social_tiktok_link": "",
+    "enable_customer_accounts": false,
+    "currency_code_enabled": true,
+    "cart_type": "drawer"
+  },
+  "presets": {}
+}

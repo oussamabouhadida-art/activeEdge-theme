@@ -1,0 +1,64 @@
+{% comment %}
+  Renders price with compare-at if on sale.
+
+  Accepts:
+  - product: {Object} Product or variant object (required)
+  - show_badges: {Boolean} Show sale/sold-out badge. Default: true
+  - variant: {Object} Optional specific variant to show price for
+
+  Usage:
+  {% render 'price', product: product %}
+  {% render 'price', product: product, variant: product.selected_or_first_available_variant %}
+{% endcomment %}
+
+{%- liquid
+  if variant
+    assign target = variant
+  else
+    assign target = product.selected_or_first_available_variant
+  endif
+
+  if target == blank
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 0
+  assign available = target.available
+
+  assign on_sale = false
+  if compare_at_price > price
+    assign on_sale = true
+  endif
+
+  if show_badges == nil
+    assign show_badges = true
+  endif
+-%}
+
+<div class="price{% if on_sale %} price--on-sale{% endif %}{% unless available %} price--sold-out{% endunless %}">
+
+  {%- if on_sale -%}
+    <span class="price__sale">
+      <span class="sr-only">{{ 'product.sale_price' | t | default: 'Prix soldé' }}</span>
+      {{ price | money }}
+    </span>
+    <span class="price__compare">
+      <span class="sr-only">{{ 'product.regular_price' | t | default: 'Prix normal' }}</span>
+      <s>{{ compare_at_price | money }}</s>
+    </span>
+    {%- if show_badges -%}
+      {%- assign savings_percent = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price | round -%}
+      <span class="price__savings">-{{ savings_percent }}%</span>
+    {%- endif -%}
+  {%- else -%}
+    <span class="price__regular">
+      {%- if available -%}
+        {{ price | money }}
+      {%- else -%}
+        {{ 'product.sold_out' | t }}
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+
+</div>

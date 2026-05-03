@@ -1,0 +1,130 @@
+<section class="lifestyle-split section-padding">
+  {%- for block in section.blocks -%}
+    {%- assign is_reversed = block.settings.image_position == 'right' -%}
+    <div class="lifestyle-split__row{% if is_reversed %} lifestyle-split__row--reversed{% endif %}" {{ block.shopify_attributes }}>
+      <div class="lifestyle-split__media">
+        {%- if block.settings.image != blank -%}
+          <img
+            src="{{ block.settings.image | image_url: width: 900 }}"
+            srcset="
+              {{ block.settings.image | image_url: width: 600 }} 600w,
+              {{ block.settings.image | image_url: width: 900 }} 900w,
+              {{ block.settings.image | image_url: width: 1200 }} 1200w
+            "
+            sizes="(min-width: 768px) 50vw, 100vw"
+            alt="{{ block.settings.image.alt | default: block.settings.heading }}"
+            class="lifestyle-split__image"
+            loading="lazy"
+          >
+        {%- else -%}
+          <div class="lifestyle-split__image-placeholder"></div>
+        {%- endif -%}
+      </div>
+
+      <div class="lifestyle-split__content">
+        <div class="lifestyle-split__inner">
+          {%- if block.settings.eyebrow != blank -%}
+            <p class="lifestyle-split__eyebrow">{{ block.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if block.settings.heading != blank -%}
+            <h2 class="lifestyle-split__heading">{{ block.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="lifestyle-split__text rte">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.cta_label != blank and block.settings.cta_url != blank -%}
+            <a href="{{ block.settings.cta_url }}" class="btn btn--primary lifestyle-split__cta">
+              {{ block.settings.cta_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Lifestyle split",
+  "max_blocks": 4,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "split_row",
+      "name": "Split row",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow text"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Fabriqué pour bouger"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Nos accessoires sont conçus pour s'adapter à ton rythme — que tu cours le matin, enchaînes les trajets à vélo ou pratiques le yoga au coucher du soleil.</p>"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "Découvrir"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "CTA link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lifestyle split",
+      "blocks": [
+        {
+          "type": "split_row",
+          "settings": {
+            "eyebrow": "Notre vision",
+            "heading": "Fabriqué pour ceux qui bougent",
+            "text": "<p>Chaque détail compte quand tu es en mouvement. ActiveEdge design des accessoires qui disparaissent dans ta pratique pour que tu puisses te concentrer sur l'essentiel.</p>",
+            "cta_label": "Notre histoire",
+            "image_position": "left"
+          }
+        },
+        {
+          "type": "split_row",
+          "settings": {
+            "eyebrow": "Matériaux",
+            "heading": "Responsable par nature",
+            "text": "<p>Nous utilisons des matériaux recyclés et des processus de fabrication éco-responsables — parce que prendre soin de la planète fait partie du lifestyle actif.</p>",
+            "cta_label": "Nos engagements",
+            "image_position": "right"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

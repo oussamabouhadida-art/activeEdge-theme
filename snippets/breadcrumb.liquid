@@ -1,0 +1,115 @@
+{% comment %}
+  Renders breadcrumb trail for collection, product, blog, article pages.
+  No parameters needed — uses current template context automatically.
+{% endcomment %}
+
+{%- unless template.name == 'index' -%}
+  <nav class="breadcrumb" aria-label="{{ 'general.breadcrumbs' | t | default: 'Fil d\'Ariane' }}">
+    <ol class="breadcrumb__list" role="list" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+      <!-- Home -->
+      <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="{{ routes.root_url }}" class="breadcrumb__link" itemprop="item">
+          <span itemprop="name">{{ 'general.breadcrumbs_home' | t | default: 'Accueil' }}</span>
+        </a>
+        <meta itemprop="position" content="1">
+        <span class="breadcrumb__separator" aria-hidden="true">/</span>
+      </li>
+
+      {%- if template.name == 'collection' -%}
+        <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="breadcrumb__current" itemprop="name" aria-current="page">{{ collection.title }}</span>
+          <meta itemprop="position" content="2">
+        </li>
+
+      {%- elsif template.name == 'product' -%}
+        {%- if collection -%}
+          <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="{{ collection.url }}" class="breadcrumb__link" itemprop="item">
+              <span itemprop="name">{{ collection.title }}</span>
+            </a>
+            <meta itemprop="position" content="2">
+            <span class="breadcrumb__separator" aria-hidden="true">/</span>
+          </li>
+          <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="breadcrumb__current" itemprop="name" aria-current="page">{{ product.title | truncate: 50 }}</span>
+            <meta itemprop="position" content="3">
+          </li>
+        {%- else -%}
+          <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="breadcrumb__current" itemprop="name" aria-current="page">{{ product.title | truncate: 50 }}</span>
+            <meta itemprop="position" content="2">
+          </li>
+        {%- endif -%}
+
+      {%- elsif template.name == 'blog' -%}
+        <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="breadcrumb__current" itemprop="name" aria-current="page">{{ blog.title }}</span>
+          <meta itemprop="position" content="2">
+        </li>
+
+      {%- elsif template.name == 'article' -%}
+        <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="{{ blog.url }}" class="breadcrumb__link" itemprop="item">
+            <span itemprop="name">{{ blog.title }}</span>
+          </a>
+          <meta itemprop="position" content="2">
+          <span class="breadcrumb__separator" aria-hidden="true">/</span>
+        </li>
+        <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="breadcrumb__current" itemprop="name" aria-current="page">{{ article.title | truncate: 60 }}</span>
+          <meta itemprop="position" content="3">
+        </li>
+
+      {%- elsif template.name == 'page' -%}
+        <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="breadcrumb__current" itemprop="name" aria-current="page">{{ page.title }}</span>
+          <meta itemprop="position" content="2">
+        </li>
+
+      {%- elsif template.name == 'search' -%}
+        <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="breadcrumb__current" itemprop="name" aria-current="page">{{ 'search.title' | t }}</span>
+          <meta itemprop="position" content="2">
+        </li>
+      {%- endif -%}
+
+    </ol>
+  </nav>
+{%- endunless -%}
+
+<style>
+.breadcrumb {
+  padding: var(--space-4) 0;
+}
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.breadcrumb__link {
+  color: var(--color-text-medium);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.breadcrumb__link:hover {
+  color: var(--color-green);
+}
+
+.breadcrumb__separator {
+  color: var(--color-text-light);
+  margin: 0 2px;
+}
+
+.breadcrumb__current {
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+}
+</style>

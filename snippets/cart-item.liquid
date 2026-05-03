@@ -1,0 +1,88 @@
+{% comment %}
+  Renders a single cart item row.
+  Accepts: item {Object} — a Shopify cart line item
+{% endcomment %}
+
+<li class="cart-item" data-key="{{ item.key }}">
+
+  <!-- Image -->
+  <div class="cart-item__image-wrap">
+    {%- if item.image -%}
+      <a href="{{ item.url }}">
+        <img
+          src="{{ item.image | image_url: width: 160 }}"
+          alt="{{ item.image.alt | default: item.title | escape }}"
+          class="cart-item__image"
+          width="80"
+          height="80"
+          loading="lazy"
+        >
+      </a>
+    {%- endif -%}
+  </div>
+
+  <!-- Details -->
+  <div class="cart-item__details">
+
+    <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+
+    {%- if item.variant.title != 'Default Title' -%}
+      <p class="cart-item__variant">{{ item.variant.title }}</p>
+    {%- endif -%}
+
+    {%- if item.selling_plan_allocation -%}
+      <p class="cart-item__variant">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+    {%- endif -%}
+
+    <div class="cart-item__price-row">
+      {%- if item.original_line_price != item.final_line_price -%}
+        <span class="cart-item__price">{{ item.final_line_price | money }}</span>
+        <span class="cart-item__price--compare">{{ item.original_line_price | money }}</span>
+      {%- else -%}
+        <span class="cart-item__price">{{ item.original_line_price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    <!-- Qty + Remove -->
+    <div class="cart-item__qty">
+      <div class="cart-item__qty-wrap">
+        <button
+          class="cart-item__qty-btn"
+          data-action="decrease"
+          aria-label="{{ 'cart.quantity' | t }} {{ 'general.minus' | t | default: 'moins' }}"
+          type="button"
+        >
+          &minus;
+        </button>
+        <input
+          type="number"
+          class="cart-item__qty-input"
+          value="{{ item.quantity }}"
+          min="0"
+          max="99"
+          data-key="{{ item.key }}"
+          aria-label="{{ 'cart.quantity' | t }}"
+        >
+        <button
+          class="cart-item__qty-btn"
+          data-action="increase"
+          aria-label="{{ 'cart.quantity' | t }} {{ 'general.plus' | t | default: 'plus' }}"
+          type="button"
+        >
+          +
+        </button>
+      </div>
+    </div>
+
+    <button
+      class="cart-item__remove"
+      data-key="{{ item.key }}"
+      type="button"
+      aria-label="{{ 'cart.remove' | t }}: {{ item.title | escape }}"
+    >
+      {{ 'cart.remove' | t }}
+    </button>
+
+  </div>
+
+</li>

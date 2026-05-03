@@ -1,0 +1,183 @@
+<header class="header" id="site-header" role="banner">
+  <div class="header__inner page-width-full">
+
+    <!-- Mobile menu button -->
+    <button
+      class="header__menu-toggle"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="{{ 'sections.header.menu' | t }}"
+      id="mobile-menu-btn"
+    >
+      {%- render 'icon-menu' -%}
+    </button>
+
+    <!-- Logo -->
+    <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        <img
+          src="{{ section.settings.logo | image_url: width: 200 }}"
+          alt="{{ shop.name }}"
+          width="{{ section.settings.logo_width }}"
+          loading="eager"
+        >
+      {%- else -%}
+        <span class="header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="header__nav" aria-label="{{ 'sections.header.main_menu' | t }}">
+      {%- if section.settings.menu != blank -%}
+        {%- for link in linklists[section.settings.menu].links -%}
+          {%- if link.links != blank -%}
+            <div class="header__nav-item header__nav-item--dropdown">
+              <button class="header__nav-link header__nav-link--parent" aria-expanded="false">
+                {{ link.title }}
+                {%- render 'icon-chevron' -%}
+              </button>
+              <ul class="header__dropdown" role="list">
+                {%- for child_link in link.links -%}
+                  <li>
+                    <a href="{{ child_link.url }}" class="header__dropdown-link{% if child_link.active %} active{% endif %}">
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- else -%}
+            <a href="{{ link.url }}" class="header__nav-link{% if link.active %} active{% endif %}">{{ link.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </nav>
+
+    <!-- Header actions -->
+    <div class="header__actions">
+      <!-- Search -->
+      <button class="header__action-btn" aria-label="{{ 'general.search.search' | t }}" id="search-toggle">
+        {%- render 'icon-search' -%}
+      </button>
+
+      <!-- Account -->
+      {%- if settings.enable_customer_accounts -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+           class="header__action-btn"
+           aria-label="{{ 'customer.account.title' | t }}"
+        >
+          {%- render 'icon-account' -%}
+        </a>
+      {%- endif -%}
+
+      <!-- Cart -->
+      <button
+        class="header__action-btn header__cart-btn"
+        aria-label="{{ 'sections.cart.title' | t }}"
+        id="cart-drawer-toggle"
+        aria-controls="cart-drawer"
+        aria-expanded="false"
+      >
+        {%- render 'icon-cart' -%}
+        <span class="header__cart-count{% if cart.item_count == 0 %} hidden{% endif %}" id="cart-count" aria-live="polite">
+          {{ cart.item_count }}
+        </span>
+      </button>
+    </div>
+
+  </div><!-- /.header__inner -->
+
+  <!-- Search bar (hidden by default) -->
+  <div class="header__search-bar" id="search-bar" aria-hidden="true">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form">
+      <input
+        type="search"
+        name="q"
+        placeholder="{{ 'general.search.placeholder' | t }}"
+        class="header__search-input"
+        autocomplete="off"
+        aria-label="{{ 'general.search.search' | t }}"
+        id="predictive-search-input"
+      >
+      <button type="submit" aria-label="{{ 'general.search.search' | t }}" class="header__search-submit">
+        {%- render 'icon-search' -%}
+      </button>
+      <button type="button" class="header__search-close" id="search-close" aria-label="{{ 'general.close' | t }}">
+        {%- render 'icon-close' -%}
+      </button>
+    </form>
+    <div class="predictive-search" id="predictive-search-results" aria-live="polite"></div>
+  </div>
+
+  <!-- Mobile nav drawer -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="{{ 'sections.header.mobile_menu' | t }}" aria-hidden="true">
+    <div class="mobile-nav__header">
+      <span class="mobile-nav__title">{{ 'sections.header.menu' | t }}</span>
+      <button class="mobile-nav__close" id="mobile-nav-close" aria-label="{{ 'general.close' | t }}">
+        {%- render 'icon-close' -%}
+      </button>
+    </div>
+    <ul class="mobile-nav__list" role="list">
+      {%- if section.settings.menu != blank -%}
+        {%- for link in linklists[section.settings.menu].links -%}
+          <li class="mobile-nav__item">
+            <a href="{{ link.url }}" class="mobile-nav__link{% if link.active %} active{% endif %}">
+              {{ link.title }}
+            </a>
+            {%- if link.links != blank -%}
+              <ul class="mobile-nav__sub" role="list">
+                {%- for child_link in link.links -%}
+                  <li>
+                    <a href="{{ child_link.url }}" class="mobile-nav__sub-link{% if child_link.active %} active{% endif %}">
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+    <div class="mobile-nav__footer">
+      {%- render 'language-switcher' -%}
+    </div>
+  </nav>
+
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 160
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Sticky header",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

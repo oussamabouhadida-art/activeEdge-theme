@@ -1,0 +1,102 @@
+<section class="newsletter section-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="page-width">
+    <div class="newsletter__inner">
+      <div class="newsletter__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="newsletter__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="newsletter__heading">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subtext != blank -%}
+          <p class="newsletter__subtext">{{ section.settings.subtext }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="newsletter__form-wrap">
+        {%- form 'customer', id: 'newsletter-form', class: 'newsletter__form' -%}
+          {{ form.errors | default_errors }}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          {%- if form.posted_successfully? -%}
+            <div class="newsletter__success">
+              <span class="newsletter__success-icon">{%- render 'icon-check' -%}</span>
+              <p>{{ 'sections.newsletter.success' | t }}</p>
+            </div>
+          {%- else -%}
+            <div class="newsletter__input-group">
+              <label for="newsletter-email" class="visually-hidden">{{ 'sections.newsletter.email_label' | t }}</label>
+              <input
+                type="email"
+                name="contact[email]"
+                id="newsletter-email"
+                class="newsletter__input"
+                value="{{ form.email }}"
+                placeholder="{{ 'sections.newsletter.email_placeholder' | t }}"
+                autocomplete="email"
+                required
+                aria-required="true"
+              >
+              <button type="submit" class="btn btn--primary newsletter__btn">
+                {{ section.settings.button_label }}
+              </button>
+            </div>
+            <p class="newsletter__disclaimer">{{ section.settings.disclaimer }}</p>
+          {%- endif -%}
+
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Rejoins la communauté"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bouge avec nous"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Conseils sport, nouveautés exclusives et offres réservées à la communauté ActiveEdge."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "S'inscrire"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer text",
+      "default": "Pas de spam. Désabonnement en un clic."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1B4332"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "settings": {
+        "heading": "Bouge avec nous",
+        "subtext": "Rejoins la communauté ActiveEdge pour des conseils, des inspirations et des offres exclusives."
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,138 @@
+<section class="why-us section-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header">
+        <h2 class="section-title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-subtitle">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="why-us__grid">
+      {%- for block in section.blocks -%}
+        <div class="why-us__block" {{ block.shopify_attributes }}>
+          <div class="why-us__icon">
+            {%- case block.settings.icon -%}
+              {%- when 'leaf' -%}
+                {%- render 'icon-leaf' -%}
+              {%- when 'truck' -%}
+                {%- render 'icon-truck' -%}
+              {%- when 'return' -%}
+                {%- render 'icon-return' -%}
+              {%- when 'check' -%}
+                {%- render 'icon-check' -%}
+              {%- when 'star' -%}
+                {%- render 'icon-star' -%}
+              {%- else -%}
+                {%- render 'icon-check' -%}
+            {%- endcase -%}
+          </div>
+          <h3 class="why-us__title">{{ block.settings.title }}</h3>
+          {%- if block.settings.text != blank -%}
+            <p class="why-us__text">{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why ActiveEdge",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Pourquoi ActiveEdge ?"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Des produits pensés pour ceux qui bougent."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F0FAF5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf / Eco" },
+            { "value": "truck", "label": "Truck / Shipping" },
+            { "value": "return", "label": "Return" },
+            { "value": "check", "label": "Check / Quality" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Qualité garantie"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Chaque produit est testé par notre communauté."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why ActiveEdge",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Éco-responsable",
+            "text": "Matériaux durables, emballages recyclables."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "Livraison rapide",
+            "text": "Expédition en 24h, livraison 2-3 jours ouvrés."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "return",
+            "title": "Retours faciles",
+            "text": "30 jours pour changer d'avis, sans questions."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "title": "Qualité testée",
+            "text": "Conçus avec des athlètes du quotidien."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

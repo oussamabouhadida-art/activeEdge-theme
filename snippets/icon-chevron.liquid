@@ -1,0 +1,19 @@
+{% comment %}
+  Chevron icon — accepts direction param.
+  direction: 'down' (default), 'up', 'left', 'right'
+{% endcomment %}
+
+{%- liquid
+  assign rotation = '0'
+  if direction == 'up'
+    assign rotation = '180'
+  elsif direction == 'left'
+    assign rotation = '90'
+  elsif direction == 'right'
+    assign rotation = '-90'
+  endif
+-%}
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"{% if rotation != '0' %} style="transform: rotate({{ rotation }}deg);"{% endif %}>
+  <polyline points="6 9 12 15 18 9"/>
+</svg>

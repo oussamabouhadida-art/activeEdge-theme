@@ -1,0 +1,90 @@
+{% comment %}
+  Cart Drawer — rendered in layout/theme.liquid via {% render 'cart-drawer' %}
+  JavaScript in assets/cart-drawer.js handles all interactivity.
+{% endcomment %}
+
+<div
+  id="cart-drawer"
+  class="cart-drawer"
+  aria-label="{{ 'cart.title' | t }}"
+  aria-modal="true"
+  role="dialog"
+  aria-hidden="true"
+>
+
+  <!-- Header -->
+  <div class="cart-drawer__header">
+    <h2 class="cart-drawer__title">
+      {{ 'cart.title' | t }}
+      <span class="cart-drawer__count" id="cart-drawer-count" aria-live="polite">{{ cart.item_count }}</span>
+    </h2>
+    <button
+      class="cart-drawer__close"
+      aria-label="{{ 'general.close' | t }}"
+      id="cart-drawer-close"
+    >
+      {%- render 'icon-close' -%}
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="cart-drawer__body" id="cart-drawer-body">
+
+    {%- if cart.item_count > 0 -%}
+      <ul class="cart-drawer__items" aria-label="{{ 'cart.title' | t }}">
+        {%- for item in cart.items -%}
+          {%- render 'cart-item', item: item -%}
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <div class="cart-drawer__empty" id="cart-drawer-empty">
+        <div class="cart-drawer__empty-icon">
+          {%- render 'icon-cart' -%}
+        </div>
+        <p class="cart-drawer__empty-title">{{ 'cart.empty' | t }}</p>
+        <p class="cart-drawer__empty-text">{{ 'cart.continue' | t }}</p>
+      </div>
+    {%- endif -%}
+
+  </div>
+
+  <!-- Footer -->
+  {%- if cart.item_count > 0 -%}
+    <div class="cart-drawer__footer" id="cart-drawer-footer">
+
+      {%- assign free_shipping_threshold = 3500 -%}
+      {%- if cart.total_price < free_shipping_threshold -%}
+        {%- assign remaining = free_shipping_threshold | minus: cart.total_price | money -%}
+        <div class="cart-drawer__shipping-note">
+          Plus que <span>{{ remaining }}</span> pour bénéficier de la <span>livraison offerte</span> !
+        </div>
+      {%- else -%}
+        <div class="cart-drawer__shipping-note">
+          <span>Livraison offerte</span> sur votre commande !
+        </div>
+      {%- endif -%}
+
+      <div class="cart-drawer__subtotal">
+        <span>{{ 'cart.subtotal' | t }}</span>
+        <span class="cart-drawer__subtotal-amount" id="cart-drawer-subtotal">{{ cart.total_price | money }}</span>
+      </div>
+
+      <a
+        href="{{ routes.checkout }}"
+        class="btn btn--primary btn--full cart-drawer__checkout"
+        id="cart-drawer-checkout"
+      >
+        {{ 'cart.checkout' | t }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+
+      <button class="cart-drawer__continue" id="cart-drawer-continue" type="button">
+        {{ 'cart.continue' | t }}
+      </button>
+
+    </div>
+  {%- endif -%}
+
+</div>

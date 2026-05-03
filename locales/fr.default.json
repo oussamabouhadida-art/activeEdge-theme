@@ -1,0 +1,282 @@
+{
+  "general": {
+    "continue_shopping": "Continuer mes achats",
+    "close": "Fermer",
+    "loading": "Chargement...",
+    "search": "Rechercher",
+    "submit": "Envoyer",
+    "view_all": "Voir tout",
+    "meta": {
+      "tags": "Étiqueté \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "pagination": "Pagination",
+    "pagination_prev": "Précédent",
+    "pagination_next": "Suivant",
+    "page": "Page",
+    "current_page": "Page courante",
+    "breadcrumbs": "Fil d'Ariane",
+    "breadcrumbs_home": "Accueil",
+    "minus": "moins",
+    "plus": "plus",
+    "search": {
+      "search": "Rechercher",
+      "placeholder": "Rechercher un produit..."
+    },
+    "close": "Fermer",
+    "minus": "moins",
+    "plus": "plus"
+  },
+  "accessibility": {
+    "skip_to_content": "Passer au contenu principal"
+  },
+  "header": {
+    "cart": "Panier",
+    "account": "Mon compte",
+    "search_placeholder": "Rechercher un produit...",
+    "language": "Langue",
+    "menu": "Menu",
+    "main_menu": "Navigation principale",
+    "mobile_menu": "Menu mobile"
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "main_menu": "Navigation principale",
+      "mobile_menu": "Menu mobile"
+    },
+    "cart": {
+      "title": "Mon panier",
+      "empty": "Votre panier est vide",
+      "subtotal": "Sous-total",
+      "checkout": "Passer la commande",
+      "continue_shopping": "Continuer mes achats",
+      "discount": "Remise",
+      "order_summary": "Récapitulatif",
+      "shipping_note": "Livraison calculée à l'étape suivante"
+    },
+    "announcement_bar": {
+      "label": "Annonce"
+    },
+    "trust_bar": {
+      "label": "Garanties"
+    },
+    "collection": {
+      "sort_by": "Trier par",
+      "sort_by_label": "Trier par",
+      "filter": "Filtrer",
+      "empty": "Aucun produit trouvé.",
+      "price_min": "Prix min",
+      "price_max": "Prix max",
+      "product_count": "{{ count }} produit"
+    },
+    "featured_collection": {
+      "view_all": "Voir tout",
+      "onboarding_title": "Titre du produit"
+    },
+    "newsletter": {
+      "email_label": "Adresse email",
+      "email_placeholder": "Ton adresse email",
+      "success": "Super ! Tu es maintenant abonné(e)."
+    },
+    "social_proof": {
+      "verified": "Achat vérifié",
+      "reviews": "avis"
+    },
+    "footer": {
+      "copyright": "Tous droits réservés."
+    }
+  },
+  "cart": {
+    "title": "Mon panier",
+    "empty": "Votre panier est vide",
+    "subtotal": "Sous-total",
+    "checkout": "Passer la commande",
+    "item_count": "{{ count }} article",
+    "item_count_plural": "{{ count }} articles",
+    "continue": "Continuer mes achats",
+    "remove": "Supprimer",
+    "quantity": "Quantité"
+  },
+  "product": {
+    "add_to_cart": "Ajouter au panier",
+    "sold_out": "Rupture de stock",
+    "unavailable": "Non disponible",
+    "view_details": "Voir le produit",
+    "sale": "Promo",
+    "new": "Nouveau",
+    "shipping_info": "Livraison offerte dès 35€",
+    "returns_info": "Retours gratuits 30 jours",
+    "quantity": "Quantité",
+    "size_guide": "Guide des tailles",
+    "free_shipping": "Livraison offerte dès 35€",
+    "free_returns": "Retours gratuits 30 jours",
+    "sale_price": "Prix soldé",
+    "regular_price": "Prix normal"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Rupture de stock",
+      "unavailable": "Non disponible",
+      "quantity": "Quantité",
+      "quantity_decrease": "Diminuer la quantité",
+      "quantity_increase": "Augmenter la quantité",
+      "description": "Description",
+      "shipping": "Livraison & délais",
+      "returns": "Retours & remboursements",
+      "gallery": "Galerie produit",
+      "free_shipping": "Livraison offerte dès 35€",
+      "free_returns": "Retours gratuits 30 jours"
+    }
+  },
+  "collection": {
+    "sort_by": "Trier par",
+    "filter": "Filtrer",
+    "products_count": "{{ count }} produit",
+    "products_count_plural": "{{ count }} produits",
+    "no_results": "Aucun produit trouvé"
+  },
+  "search": {
+    "title": "Recherche",
+    "placeholder": "Que cherchez-vous ?",
+    "no_results": "Aucun résultat pour \"{{ terms }}\"",
+    "results_count": "{{ count }} résultat pour \"{{ terms }}\"",
+    "results_count_plural": "{{ count }} résultats pour \"{{ terms }}\""
+  },
+  "blog": {
+    "read_more": "Lire la suite",
+    "posted_by": "Par {{ author }}",
+    "back_to_blog": "Retour au journal"
+  },
+  "newsletter": {
+    "title": "Rejoins la communauté ActiveEdge",
+    "subtitle": "Conseils mouvement, nouveautés et offres exclusives — directement dans ta boîte mail.",
+    "placeholder": "Ton adresse email",
+    "submit": "Je m'abonne",
+    "success": "Super ! Tu es maintenant abonné(e).",
+    "disclaimer": "Pas de spam. Désabonnement en un clic."
+  },
+  "trust": {
+    "shipping": "Livraison offerte dès 35€",
+    "returns": "Retours gratuits 30 jours",
+    "quality": "Matériaux premium durables",
+    "eco": "Engagé pour demain"
+  },
+  "hero": {
+    "default_title": "Bouge libre.",
+    "default_subtitle": "Des accessoires pensés pour ton quotidien actif.",
+    "default_cta": "Découvrir nos produits"
+  },
+  "announcement": {
+    "default": "🌿 Livraison offerte dès 35 € — France & Europe"
+  },
+  "why": {
+    "title": "Pourquoi ActiveEdge ?",
+    "subtitle": "Des produits pensés pour bouger léger au quotidien.",
+    "point_1_title": "Conçu pour bouger",
+    "point_1_text": "Léger, pratique, pensé pour ta routine active.",
+    "point_2_title": "Qualité durable",
+    "point_2_text": "Matériaux résistants sélectionnés avec soin.",
+    "point_3_title": "Livraison rapide",
+    "point_3_text": "Expédié en 24-48h, livraison offerte dès 35€.",
+    "point_4_title": "Retours faciles",
+    "point_4_text": "30 jours pour changer d'avis, sans stress."
+  },
+  "lifestyle": {
+    "default_title": "Le mouvement, au quotidien",
+    "default_text": "ActiveEdge est né d'une conviction simple : bouger mieux ne devrait pas être compliqué. Nos accessoires s'intègrent naturellement dans ta vie — running matinal, trajet urbain, séance de récup. Légers, pensés, avec toi.",
+    "default_cta": "Notre histoire"
+  },
+  "footer": {
+    "newsletter_title": "Reste connecté(e)",
+    "shop": "Boutique",
+    "help": "Aide",
+    "legal": "Légal",
+    "follow": "Suivez-nous",
+    "rights": "© {{ year }} ActiveEdge. Tous droits réservés.",
+    "shipping_policy": "Politique de livraison",
+    "return_policy": "Retours & remboursements",
+    "privacy_policy": "Politique de confidentialité",
+    "faq": "FAQ",
+    "about": "Notre histoire",
+    "contact": "Contact"
+  },
+  "404": {
+    "title": "Page introuvable",
+    "subtitle": "La page que tu cherches n'existe pas ou a été déplacée.",
+    "cta": "Retour à l'accueil"
+  },
+  "customer": {
+    "account": {
+      "title": "Mon compte",
+      "orders": "Mes commandes",
+      "logout": "Se déconnecter",
+      "no_orders": "Vous n'avez pas encore passé de commande."
+    },
+    "login": {
+      "title": "Connexion",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "forgot_password": "Mot de passe oublié ?",
+      "new_customer": "Nouveau client ?",
+      "register_link": "Créer un compte"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Créer mon compte",
+      "have_account": "Déjà un compte ?",
+      "login_link": "Se connecter"
+    },
+    "orders": {
+      "title": "Historique des commandes",
+      "order_number": "Commande",
+      "date": "Date",
+      "payment_status": "Paiement",
+      "fulfillment_status": "Expédition",
+      "total": "Total",
+      "details": "Détails",
+      "none": "Vous n'avez pas encore passé de commande."
+    },
+    "addresses": {
+      "title": "Mes adresses",
+      "default": "Adresse par défaut",
+      "add": "Ajouter une adresse",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "delete_confirm": "Êtes-vous sûr de vouloir supprimer cette adresse ?"
+    }
+  },
+  "customers": {
+    "login": {
+      "title": "Connexion",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "forgot_password": "Mot de passe oublié ?",
+      "new_customer": "Nouveau client ?",
+      "register_link": "Créer un compte"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Créer mon compte",
+      "have_account": "Déjà un compte ?",
+      "login_link": "Se connecter"
+    },
+    "account": {
+      "title": "Mon compte",
+      "orders": "Mes commandes",
+      "logout": "Se déconnecter",
+      "no_orders": "Vous n'avez pas encore passé de commande."
+    }
+  }
+}

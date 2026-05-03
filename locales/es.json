@@ -1,0 +1,130 @@
+{
+  "general": {
+    "continue_shopping": "Seguir comprando",
+    "close": "Cerrar",
+    "loading": "Cargando...",
+    "search": "Buscar",
+    "submit": "Enviar",
+    "view_all": "Ver todo",
+    "pagination_prev": "Anterior",
+    "pagination_next": "Siguiente",
+    "breadcrumbs_home": "Inicio",
+    "minus": "menos",
+    "plus": "más"
+  },
+  "accessibility": {
+    "skip_to_content": "Saltar al contenido principal"
+  },
+  "header": {
+    "cart": "Carrito",
+    "account": "Mi cuenta",
+    "search_placeholder": "Buscar un producto...",
+    "menu": "Menú"
+  },
+  "cart": {
+    "title": "Mi carrito",
+    "empty": "Tu carrito está vacío",
+    "subtotal": "Subtotal",
+    "checkout": "Finalizar compra",
+    "continue": "Seguir comprando",
+    "remove": "Eliminar",
+    "quantity": "Cantidad"
+  },
+  "product": {
+    "add_to_cart": "Añadir al carrito",
+    "sold_out": "Agotado",
+    "unavailable": "No disponible",
+    "view_details": "Ver producto",
+    "sale": "Oferta",
+    "new": "Nuevo",
+    "free_shipping": "Envío gratis desde 35€",
+    "free_returns": "Devoluciones gratis 30 días",
+    "sale_price": "Precio de oferta",
+    "regular_price": "Precio normal"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Añadir al carrito",
+      "sold_out": "Agotado",
+      "unavailable": "No disponible",
+      "quantity": "Cantidad",
+      "quantity_decrease": "Disminuir cantidad",
+      "quantity_increase": "Aumentar cantidad",
+      "description": "Descripción",
+      "shipping": "Envío y plazos",
+      "returns": "Devoluciones y reembolsos",
+      "free_shipping": "Envío gratis desde 35€",
+      "free_returns": "Devoluciones gratis 30 días"
+    }
+  },
+  "collection": {
+    "sort_by": "Ordenar por",
+    "filter": "Filtrar",
+    "no_results": "No se encontraron productos"
+  },
+  "search": {
+    "title": "Búsqueda",
+    "placeholder": "¿Qué buscas?",
+    "no_results": "Sin resultados para \"{{ terms }}\""
+  },
+  "newsletter": {
+    "title": "Únete a la comunidad ActiveEdge",
+    "subtitle": "Consejos de movimiento, novedades y ofertas exclusivas — directamente en tu bandeja de entrada.",
+    "placeholder": "Tu dirección de email",
+    "submit": "Suscribirme",
+    "success": "¡Genial! Ahora estás suscrito/a.",
+    "disclaimer": "Sin spam. Cancela cuando quieras."
+  },
+  "trust": {
+    "shipping": "Envío gratis desde 35€",
+    "returns": "Devoluciones gratis 30 días",
+    "quality": "Materiales premium duraderos",
+    "eco": "Comprometidos con el mañana"
+  },
+  "hero": {
+    "default_title": "Muévete libre.",
+    "default_subtitle": "Accesorios pensados para tu día a día activo.",
+    "default_cta": "Descubrir productos"
+  },
+  "footer": {
+    "rights": "© {{ year }} ActiveEdge. Todos los derechos reservados.",
+    "shop": "Tienda",
+    "help": "Ayuda",
+    "legal": "Legal",
+    "follow": "Síguenos",
+    "about": "Nuestra historia",
+    "contact": "Contacto"
+  },
+  "404": {
+    "title": "Página no encontrada",
+    "subtitle": "La página que buscas no existe o ha sido movida.",
+    "cta": "Volver al inicio"
+  },
+  "customers": {
+    "login": {
+      "title": "Iniciar sesión",
+      "email": "Email",
+      "password": "Contraseña",
+      "submit": "Iniciar sesión",
+      "forgot_password": "¿Olvidaste tu contraseña?",
+      "new_customer": "¿Nuevo cliente?",
+      "register_link": "Crear una cuenta"
+    },
+    "register": {
+      "title": "Crear cuenta",
+      "first_name": "Nombre",
+      "last_name": "Apellido",
+      "email": "Email",
+      "password": "Contraseña",
+      "submit": "Crear mi cuenta",
+      "have_account": "¿Ya tienes una cuenta?",
+      "login_link": "Iniciar sesión"
+    },
+    "account": {
+      "title": "Mi cuenta",
+      "orders": "Mis pedidos",
+      "logout": "Cerrar sesión",
+      "no_orders": "Aún no has realizado ningún pedido."
+    }
+  }
+}

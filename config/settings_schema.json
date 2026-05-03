@@ -1,0 +1,147 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "ActiveEdge",
+    "theme_version": "1.0.0",
+    "theme_author": "ActiveEdge / eTrading Company",
+    "theme_documentation_url": "https://github.com/oussamabouhadida-art/activeEdge-theme",
+    "theme_support_url": "https://github.com/oussamabouhadida-art/activeEdge-theme/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Accent colors"
+      },
+      {
+        "type": "color",
+        "id": "colors_accent_1",
+        "label": "Accent 1 (Light green)",
+        "default": "#52B788"
+      },
+      {
+        "type": "color",
+        "id": "colors_accent_2",
+        "label": "Accent 2 (Brand green)",
+        "default": "#2D6A4F"
+      },
+      {
+        "type": "header",
+        "content": "Background colors"
+      },
+      {
+        "type": "color",
+        "id": "colors_background_1",
+        "label": "Background 1 (White)",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "colors_background_2",
+        "label": "Background 2 (Pale mint)",
+        "default": "#F0FAF5"
+      },
+      {
+        "type": "header",
+        "content": "Text colors"
+      },
+      {
+        "type": "color",
+        "id": "colors_text",
+        "label": "Text",
+        "default": "#1A1A1A"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading font",
+        "default": "montserrat_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font",
+        "default": "inter_n4"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social media accounts"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter_link",
+        "label": "Twitter",
+        "info": "https://twitter.com/activeEdge"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https://facebook.com/activeEdge"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/activeEdge"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube_link",
+        "label": "YouTube"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok_link",
+        "label": "TikTok"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer (recommended)" },
+          { "value": "page", "label": "Page" }
+        ],
+        "default": "drawer"
+      }
+    ]
+  },
+  {
+    "name": "Customer accounts",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_customer_accounts",
+        "label": "Enable customer accounts",
+        "default": false
+      }
+    ]
+  }
+]

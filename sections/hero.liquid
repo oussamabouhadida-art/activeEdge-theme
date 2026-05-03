@@ -1,0 +1,191 @@
+<section class="hero{% if section.settings.full_height %} hero--full{% endif %}" style="min-height: {{ section.settings.min_height }}px;">
+
+  <!-- Background media -->
+  <div class="hero__media">
+    {%- if section.settings.video != blank -%}
+      <video
+        class="hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="{{ section.settings.image | image_url: width: 1920 }}"
+      >
+        <source src="{{ section.settings.video }}" type="video/mp4">
+      </video>
+    {%- elsif section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 1920 }}"
+        srcset="
+          {{ section.settings.image | image_url: width: 768 }} 768w,
+          {{ section.settings.image | image_url: width: 1200 }} 1200w,
+          {{ section.settings.image | image_url: width: 1920 }} 1920w
+        "
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+        class="hero__image"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {%- else -%}
+      <div class="hero__placeholder-bg"></div>
+    {%- endif -%}
+
+    <!-- Overlay -->
+    <div class="hero__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="hero__content page-width">
+    <div class="hero__text hero__text--{{ section.settings.content_alignment }}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="hero__heading">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="hero__ctas">
+        {%- if section.settings.cta_label != blank and section.settings.cta_url != blank -%}
+          <a href="{{ section.settings.cta_url }}" class="btn btn--primary btn--large hero__cta">
+            {{ section.settings.cta_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta_secondary_label != blank and section.settings.cta_secondary_url != blank -%}
+          <a href="{{ section.settings.cta_secondary_url }}" class="btn btn--outline-white btn--large hero__cta">
+            {{ section.settings.cta_secondary_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "video",
+      "label": "Video URL (MP4)",
+      "info": "Optional. Overrides image on supported browsers."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Nouvelle collection"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bouge libre."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Accessoires sport conçus pour ta vie active — du run au quotidien."
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "CTA buttons"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Primary CTA label",
+      "default": "Découvrir la collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Secondary CTA label",
+      "default": "Notre histoire"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Height"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height (desktop)",
+      "min": 400,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "default": 650
+    },
+    {
+      "type": "checkbox",
+      "id": "full_height",
+      "label": "Full viewport height",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner",
+      "settings": {
+        "heading": "Bouge libre.",
+        "subheading": "Accessoires sport conçus pour ta vie active.",
+        "cta_label": "Découvrir",
+        "overlay_opacity": 35
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,151 @@
+{% comment %}
+  Renders a product card.
+
+  Accepts:
+  - product: {Object} Product Liquid object (required)
+  - show_vendor: {Boolean} Show product vendor. Default: false
+  - show_rating: {Boolean} Show star rating. Default: false
+  - image_ratio: {String} Image ratio: 'square' (default), 'portrait', 'landscape'
+  - show_quick_add: {Boolean} Show quick-add button on hover. Default: true
+  - lazy_load: {Boolean} Lazy-load image. Default: true
+
+  Usage:
+  {% render 'product-card', product: product, show_vendor: true, show_rating: true %}
+{% endcomment %}
+
+{%- liquid
+  assign image_ratio_class = 'product-card__image-wrap'
+  if image_ratio == 'portrait'
+    assign image_ratio_class = 'product-card__image-wrap product-card__image-wrap--portrait'
+  elsif image_ratio == 'landscape'
+    assign image_ratio_class = 'product-card__image-wrap product-card__image-wrap--landscape'
+  endif
+
+  if show_quick_add == nil
+    assign show_quick_add = true
+  endif
+
+  if lazy_load == nil
+    assign lazy_load = true
+  endif
+
+  assign loading_attr = 'lazy'
+  if lazy_load == false
+    assign loading_attr = 'eager'
+  endif
+
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+
+  assign is_new = false
+  assign thirty_days_ago = 'now' | date: '%s' | minus: 2592000
+  if product.created_at | date: '%s' | plus: 0 > thirty_days_ago
+    assign is_new = true
+  endif
+-%}
+
+<div class="product-card" data-product-id="{{ product.id }}">
+  <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title | escape }}">
+
+    <!-- Image -->
+    <div class="{{ image_ratio_class }}">
+
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 600 }}"
+          srcset="
+            {{ product.featured_image | image_url: width: 300 }} 300w,
+            {{ product.featured_image | image_url: width: 600 }} 600w,
+            {{ product.featured_image | image_url: width: 900 }} 900w
+          "
+          sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(50vw - 16px)"
+          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+          class="product-card__image"
+          loading="{{ loading_attr }}"
+          width="{{ product.featured_image.width }}"
+          height="{{ product.featured_image.height }}"
+        >
+
+        {%- if product.images[1] -%}
+          <img
+            src="{{ product.images[1] | image_url: width: 600 }}"
+            alt="{{ product.images[1].alt | default: product.title | escape }}"
+            class="product-card__image-secondary"
+            loading="lazy"
+            width="{{ product.images[1].width }}"
+            height="{{ product.images[1].height }}"
+            aria-hidden="true"
+          >
+        {%- endif -%}
+      {%- else -%}
+        <div class="product-card__image-placeholder">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+      {%- endif -%}
+
+      <!-- Badges -->
+      <div class="product-card__badges" aria-hidden="true">
+        {%- if on_sale -%}
+          <span class="product-card__badge product-card__badge--sale">{{ 'product.sale' | t }}</span>
+        {%- endif -%}
+        {%- if is_new -%}
+          <span class="product-card__badge product-card__badge--new">{{ 'product.new' | t }}</span>
+        {%- endif -%}
+        {%- unless product.available -%}
+          <span class="product-card__badge" style="background:#6B7280;color:white;">{{ 'product.sold_out' | t }}</span>
+        {%- endunless -%}
+      </div>
+
+    </div>
+
+    <!-- Info -->
+    <div class="product-card__info">
+
+      {%- if show_vendor and product.vendor != blank -%}
+        <p class="product-card__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      <h3 class="product-card__title">{{ product.title }}</h3>
+
+      {%- if show_rating and product.metafields.reviews.rating != blank -%}
+        <div class="product-card__rating">
+          <div class="product-card__stars" aria-hidden="true">
+            {%- assign rating = product.metafields.reviews.rating.value | round -%}
+            {%- for i in (1..5) -%}
+              {%- render 'icon-star', filled: i <= rating -%}
+            {%- endfor -%}
+          </div>
+          <span class="product-card__rating-text sr-only">{{ product.metafields.reviews.rating.value }} sur 5</span>
+        </div>
+      {%- endif -%}
+
+      <div class="product-card__price-wrap">
+        {%- render 'price', product: product, show_badges: false -%}
+      </div>
+
+    </div>
+
+  </a>
+
+  {%- if show_quick_add and product.available -%}
+    <div class="product-card__quick-add" aria-hidden="true">
+      <button
+        class="product-card__quick-add-btn"
+        data-product-id="{{ product.id }}"
+        data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+        aria-label="{{ 'product.add_to_cart' | t }}: {{ product.title | escape }}"
+        tabindex="-1"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+        {{ 'product.add_to_cart' | t }}
+      </button>
+    </div>
+  {%- endif -%}
+
+</div>

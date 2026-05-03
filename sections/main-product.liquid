@@ -1,0 +1,248 @@
+<div class="product-page page-width" id="product-{{ product.id }}" data-product-id="{{ product.id }}">
+  {%- render 'breadcrumb' -%}
+
+  <div class="product-layout">
+
+    <!-- Gallery -->
+    <div class="product-gallery" id="product-gallery">
+      <div class="product-gallery__thumbnails" id="gallery-thumbnails" role="tablist" aria-label="{{ 'products.product.gallery' | t }}">
+        {%- for image in product.images -%}
+          <button
+            class="product-gallery__thumb{% if forloop.first %} active{% endif %}"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-controls="gallery-main-{{ forloop.index }}"
+            data-index="{{ forloop.index0 }}"
+          >
+            <img
+              src="{{ image | image_url: width: 100 }}"
+              alt="{{ image.alt | default: product.title }}"
+              width="80"
+              height="80"
+              loading="lazy"
+            >
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <div class="product-gallery__main">
+        {%- for image in product.images -%}
+          <div
+            class="product-gallery__slide{% if forloop.first %} active{% endif %}"
+            id="gallery-main-{{ forloop.index }}"
+            role="tabpanel"
+          >
+            <img
+              src="{{ image | image_url: width: 900 }}"
+              srcset="
+                {{ image | image_url: width: 600 }} 600w,
+                {{ image | image_url: width: 900 }} 900w,
+                {{ image | image_url: width: 1200 }} 1200w
+              "
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              alt="{{ image.alt | default: product.title }}"
+              class="product-gallery__image"
+              {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+            >
+          </div>
+        {%- else -%}
+          <div class="product-gallery__slide active">
+            <div class="product-gallery__placeholder"></div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Product info -->
+    <div class="product-info" id="product-info">
+
+      <!-- Title & price -->
+      {%- if product.vendor != blank and section.settings.show_vendor -%}
+        <p class="product-info__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      <h1 class="product-info__title">{{ product.title }}</h1>
+
+      <div class="product-info__price-row">
+        {%- render 'price', product: product -%}
+        {%- if product.metafields.reviews.rating != blank -%}
+          <div class="product-info__rating">
+            {%- render 'icon-star', filled: true -%}
+            <span>{{ product.metafields.reviews.rating.value }}</span>
+            <span class="product-info__rating-count">({{ product.metafields.reviews.rating_count }})</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Product form -->
+      {%- form 'product', product, id: 'product-form', class: 'product-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="variant-id">
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="product-form__option" data-option-name="{{ option.name | escape }}">
+              <label class="product-form__option-label">
+                {{ option.name }}
+              </label>
+              <div class="product-form__option-values" data-option-index="{{ forloop.index0 }}">
+                {%- for value in option.values -%}
+                  <button
+                    type="button"
+                    class="product-form__option-btn{% if option.selected_value == value %} active{% endif %}"
+                    data-value="{{ value | escape }}"
+                    aria-label="{{ option.name }}: {{ value }}"
+                  >
+                    {{ value }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <!-- Qty -->
+        <div class="product-form__qty">
+          <label class="product-form__qty-label" for="qty">{{ 'products.product.quantity' | t }}</label>
+          <div class="qty-selector">
+            <button type="button" class="qty-selector__btn" data-action="decrease" aria-label="{{ 'products.product.quantity_decrease' | t }}">−</button>
+            <input
+              type="number"
+              id="qty"
+              name="quantity"
+              value="1"
+              min="1"
+              class="qty-selector__input"
+              aria-label="{{ 'products.product.quantity' | t }}"
+            >
+            <button type="button" class="qty-selector__btn" data-action="increase" aria-label="{{ 'products.product.quantity_increase' | t }}">+</button>
+          </div>
+        </div>
+
+        <!-- ATC button -->
+        <div class="product-form__submit-wrap">
+          <button
+            type="submit"
+            name="add"
+            class="btn btn--primary btn--large btn--full product-form__atc"
+            id="product-atc"
+            {% unless product.available %}disabled{% endunless %}
+          >
+            {%- if product.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        </div>
+
+        <!-- Trust micro-signals -->
+        <div class="product-form__trust">
+          <span class="product-form__trust-item">
+            {%- render 'icon-truck' -%}
+            {{ 'products.product.free_shipping' | t }}
+          </span>
+          <span class="product-form__trust-item">
+            {%- render 'icon-return' -%}
+            {{ 'products.product.free_returns' | t }}
+          </span>
+        </div>
+
+      {%- endform -%}
+
+      <!-- Accordions -->
+      <div class="product-accordions">
+
+        {%- if product.description != blank -%}
+          <details class="accordion" open>
+            <summary class="accordion__toggle">
+              {{ 'products.product.description' | t }}
+              {%- render 'icon-chevron' -%}
+            </summary>
+            <div class="accordion__content rte">
+              {{ product.description }}
+            </div>
+          </details>
+        {%- endif -%}
+
+        {%- if section.settings.shipping_info != blank -%}
+          <details class="accordion">
+            <summary class="accordion__toggle">
+              {{ 'products.product.shipping' | t }}
+              {%- render 'icon-chevron' -%}
+            </summary>
+            <div class="accordion__content rte">
+              {{ section.settings.shipping_info }}
+            </div>
+          </details>
+        {%- endif -%}
+
+        {%- if section.settings.returns_info != blank -%}
+          <details class="accordion">
+            <summary class="accordion__toggle">
+              {{ 'products.product.returns' | t }}
+              {%- render 'icon-chevron' -%}
+            </summary>
+            <div class="accordion__content rte">
+              {{ section.settings.returns_info }}
+            </div>
+          </details>
+        {%- endif -%}
+
+      </div>
+
+    </div><!-- /.product-info -->
+  </div><!-- /.product-layout -->
+</div>
+
+<!-- Mobile sticky ATC -->
+<div class="sticky-atc" id="sticky-atc" aria-hidden="true">
+  <div class="sticky-atc__inner">
+    <div class="sticky-atc__product">
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 60 }}" alt="{{ product.title }}" width="48" height="48" loading="lazy">
+      {%- endif -%}
+      <span class="sticky-atc__title">{{ product.title | truncate: 30 }}</span>
+    </div>
+    <button
+      class="btn btn--primary sticky-atc__btn"
+      onclick="document.getElementById('product-atc').click()"
+      {% unless product.available %}disabled{% endunless %}
+    >
+      {%- if product.available -%}
+        {{ 'products.product.add_to_cart' | t }}
+      {%- else -%}
+        {{ 'products.product.sold_out' | t }}
+      {%- endif -%}
+    </button>
+  </div>
+</div>
+
+<script>
+  window.productData = {{ product | json }};
+</script>
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "shipping_info",
+      "label": "Shipping info",
+      "default": "<p>Livraison gratuite dès 50€ · Expédié en 24h · Livraison en 2–3 jours ouvrés en France métropolitaine.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "returns_info",
+      "label": "Returns info",
+      "default": "<p>Retours acceptés sous 30 jours. Produit non utilisé dans son emballage d'origine. Remboursement sous 5–7 jours ouvrés.</p>"
+    }
+  ]
+}
+{% endschema %}

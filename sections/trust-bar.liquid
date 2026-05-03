@@ -1,0 +1,106 @@
+<div class="trust-bar" role="complementary" aria-label="{{ 'sections.trust_bar.label' | t }}">
+  <div class="page-width">
+    <ul class="trust-bar__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="trust-bar__item" {{ block.shopify_attributes }}>
+          <span class="trust-bar__icon">
+            {%- case block.settings.icon -%}
+              {%- when 'truck' -%}{%- render 'icon-truck' -%}
+              {%- when 'return' -%}{%- render 'icon-return' -%}
+              {%- when 'leaf' -%}{%- render 'icon-leaf' -%}
+              {%- when 'check' -%}{%- render 'icon-check' -%}
+              {%- when 'star' -%}{%- render 'icon-star', filled: true -%}
+              {%- else -%}{%- render 'icon-check' -%}
+            {%- endcase -%}
+          </span>
+          <div class="trust-bar__text-group">
+            <span class="trust-bar__label">{{ block.settings.label }}</span>
+            {%- if block.settings.sublabel != blank -%}
+              <span class="trust-bar__sublabel">{{ block.settings.sublabel }}</span>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust bar",
+  "max_blocks": 6,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "truck", "label": "Shipping" },
+            { "value": "return", "label": "Returns" },
+            { "value": "leaf", "label": "Eco" },
+            { "value": "check", "label": "Quality" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Livraison gratuite"
+        },
+        {
+          "type": "text",
+          "id": "sublabel",
+          "label": "Sub-label",
+          "default": "Dès 50€ d'achat"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust bar",
+      "blocks": [
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "label": "Livraison gratuite",
+            "sublabel": "Dès 50€ d'achat"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "return",
+            "label": "Retours faciles",
+            "sublabel": "30 jours sans questions"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "leaf",
+            "label": "Éco-responsable",
+            "sublabel": "Matériaux durables"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "star",
+            "label": "4.9 / 5",
+            "sublabel": "1 248 avis vérifiés"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

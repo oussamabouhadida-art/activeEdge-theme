@@ -1,0 +1,65 @@
+<div class="page-width page-section">
+  <div class="customer-form-wrapper">
+    <h1 class="heading-lg">{{ 'customer.register.title' | t }}</h1>
+
+    {%- form 'create_customer' -%}
+      {{ form.errors | default_errors }}
+
+      <div class="form-field">
+        <label for="FirstName" class="form-label">{{ 'customer.register.first_name' | t }}</label>
+        <input
+          type="text"
+          name="customer[first_name]"
+          id="FirstName"
+          class="form-input"
+          autocomplete="given-name"
+          {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="LastName" class="form-label">{{ 'customer.register.last_name' | t }}</label>
+        <input
+          type="text"
+          name="customer[last_name]"
+          id="LastName"
+          class="form-input"
+          autocomplete="family-name"
+          {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="RegisterEmail" class="form-label">{{ 'customer.register.email' | t }}</label>
+        <input
+          type="email"
+          name="customer[email]"
+          id="RegisterEmail"
+          class="form-input"
+          autocomplete="email"
+          {% if form.email %}value="{{ form.email }}"{% endif %}
+          required
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="RegisterPassword" class="form-label">{{ 'customer.register.password' | t }}</label>
+        <input
+          type="password"
+          name="customer[password]"
+          id="RegisterPassword"
+          class="form-input"
+          autocomplete="new-password"
+          required
+        >
+      </div>
+
+      <button type="submit" class="btn btn--primary btn--full">{{ 'customer.register.submit' | t }}</button>
+    {%- endform -%}
+
+    <p class="customer-form__switch">
+      {{ 'customer.register.have_account' | t }}
+      <a href="{{ routes.account_login_url }}" class="link">{{ 'customer.login.sign_in' | t }}</a>
+    </p>
+  </div>
+</div>

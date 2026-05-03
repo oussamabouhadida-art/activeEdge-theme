@@ -1,0 +1,119 @@
+<section class="featured-categories section-padding">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header">
+        <h2 class="section-title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-subtitle">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="featured-categories__grid">
+      {%- for block in section.blocks -%}
+        <div class="featured-categories__item" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.link }}" class="featured-categories__link">
+            <div class="featured-categories__image-wrap">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 400 }} 400w,
+                    {{ block.settings.image | image_url: width: 600 }} 600w,
+                    {{ block.settings.image | image_url: width: 800 }} 800w
+                  "
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  alt="{{ block.settings.title }}"
+                  class="featured-categories__image"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="featured-categories__image-placeholder">
+                  <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <rect fill="#D8F3DC" width="600" height="400"/>
+                    <text x="50%" y="50%" font-family="sans-serif" font-size="24" fill="#2D6A4F" text-anchor="middle" dominant-baseline="middle">{{ block.settings.title }}</text>
+                  </svg>
+                </div>
+              {%- endif -%}
+              <div class="featured-categories__overlay"></div>
+            </div>
+            <div class="featured-categories__content">
+              <h3 class="featured-categories__title">{{ block.settings.title }}</h3>
+              {%- if block.settings.subtitle != blank -%}
+                <p class="featured-categories__subtitle">{{ block.settings.subtitle }}</p>
+              {%- endif -%}
+              <span class="featured-categories__cta">{{ block.settings.cta | default: 'Voir tout' }}</span>
+            </div>
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured categories",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Explore par univers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Du run au quotidien, on a ce qu'il te faut."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Running"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "cta",
+          "label": "CTA text",
+          "default": "Voir tout"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured categories",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Running", "subtitle": "Sacs, ceintures, accessoires", "cta": "Explorer" } },
+        { "type": "category", "settings": { "title": "Mobilité urbaine", "subtitle": "Trottinette, vélo, ville", "cta": "Explorer" } },
+        { "type": "category", "settings": { "title": "Wellness", "subtitle": "Récupération & mindset", "cta": "Explorer" } },
+        { "type": "category", "settings": { "title": "Quotidien actif", "subtitle": "Pour bouger au quotidien", "cta": "Explorer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

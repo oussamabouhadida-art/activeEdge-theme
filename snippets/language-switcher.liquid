@@ -1,0 +1,75 @@
+{% comment %}
+  Language switcher dropdown using Shopify localization.
+  Only renders if the shop has multiple active locales.
+{% endcomment %}
+
+{%- if localization.available_languages.size > 1 -%}
+  <div class="language-switcher">
+    {%- form 'localization', id: 'language-form', class: 'language-switcher__form' -%}
+      <div class="language-switcher__select-wrap">
+        <select
+          name="locale_code"
+          id="language-select"
+          class="language-switcher__select"
+          onchange="this.form.submit()"
+          aria-label="{{ 'header.language' | t | default: 'Langue' }}"
+        >
+          {%- for language in localization.available_languages -%}
+            <option
+              value="{{ language.iso_code }}"
+              {%- if language.iso_code == localization.language.iso_code -%}selected{%- endif -%}
+            >
+              {{ language.endonym_name | capitalize }}
+            </option>
+          {%- endfor -%}
+        </select>
+        {%- render 'icon-chevron', direction: 'down' -%}
+      </div>
+    {%- endform -%}
+  </div>
+{%- endif -%}
+
+<style>
+.language-switcher {
+  display: inline-flex;
+}
+
+.language-switcher__form {
+  display: flex;
+  align-items: center;
+}
+
+.language-switcher__select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.language-switcher__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-8) var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.language-switcher__select:hover,
+.language-switcher__select:focus {
+  border-color: var(--color-mid);
+  outline: none;
+}
+
+.language-switcher__select-wrap svg {
+  position: absolute;
+  right: var(--space-2);
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-medium);
+}
+</style>

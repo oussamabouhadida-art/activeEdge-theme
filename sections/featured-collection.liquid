@@ -1,0 +1,102 @@
+<section class="featured-collection section-padding">
+  <div class="page-width">
+    <div class="section-header section-header--with-cta">
+      <div>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="section-title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-subtitle">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.collection != blank and section.settings.show_view_all -%}
+        <a href="{{ collections[section.settings.collection].url }}" class="btn btn--outline">
+          {{ 'sections.featured_collection.view_all' | t }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- assign collection = collections[section.settings.collection] -%}
+    {%- if collection != blank -%}
+      <div class="product-carousel">
+        <div class="product-carousel__track" id="product-carousel-track">
+          {%- for product in collection.products limit: section.settings.products_count -%}
+            <div class="product-carousel__item">
+              {%- render 'product-card', product: product, show_quick_add: section.settings.show_quick_add -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="product-carousel">
+        <div class="product-carousel__track">
+          {%- for i in (1..4) -%}
+            <div class="product-carousel__item product-card product-card--placeholder">
+              <div class="product-card__image-wrap">
+                <div class="product-card__image-placeholder"></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__title">{{ 'sections.featured_collection.onboarding_title' | t }}</p>
+                <p class="product-card__price">—</p>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Nos best-sellers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Les favoris de la communauté ActiveEdge"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "label": "Number of products",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "Show quick add button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection",
+      "settings": {
+        "heading": "Nos best-sellers"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,133 @@
+{% comment %}
+  Renders pagination with prev/next and page numbers.
+
+  Accepts:
+  - paginate: {Object} Shopify paginate object (required)
+
+  Usage:
+  {% paginate collection.products by 24 %}
+    {% render 'pagination', paginate: paginate %}
+  {% endpaginate %}
+{% endcomment %}
+
+{%- if paginate.pages > 1 -%}
+  <nav class="pagination" aria-label="{{ 'general.pagination' | t | default: 'Pagination' }}">
+    <ul class="pagination__list" role="list">
+
+      <!-- Previous -->
+      {%- if paginate.previous -%}
+        <li class="pagination__item pagination__item--prev">
+          <a
+            href="{{ paginate.previous.url }}"
+            class="pagination__link pagination__link--arrow"
+            aria-label="{{ 'general.pagination_prev' | t | default: 'Page précédente' }}"
+            rel="prev"
+          >
+            {%- render 'icon-chevron', direction: 'left' -%}
+            <span class="hide-mobile">{{ 'general.pagination_prev' | t | default: 'Précédent' }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+
+      <!-- Page numbers -->
+      {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}
+          <li class="pagination__item">
+            <a href="{{ part.url }}" class="pagination__link" aria-label="{{ 'general.page' | t | default: 'Page' }} {{ part.title }}">
+              {{ part.title }}
+            </a>
+          </li>
+        {%- elsif part.title == paginate.current_page -%}
+          <li class="pagination__item">
+            <span class="pagination__link pagination__link--current" aria-current="page" aria-label="{{ 'general.current_page' | t | default: 'Page courante' }}: {{ part.title }}">
+              {{ part.title }}
+            </span>
+          </li>
+        {%- else -%}
+          <li class="pagination__item pagination__item--ellipsis">
+            <span class="pagination__ellipsis">&hellip;</span>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+
+      <!-- Next -->
+      {%- if paginate.next -%}
+        <li class="pagination__item pagination__item--next">
+          <a
+            href="{{ paginate.next.url }}"
+            class="pagination__link pagination__link--arrow"
+            aria-label="{{ 'general.pagination_next' | t | default: 'Page suivante' }}"
+            rel="next"
+          >
+            <span class="hide-mobile">{{ 'general.pagination_next' | t | default: 'Suivant' }}</span>
+            {%- render 'icon-chevron', direction: 'right' -%}
+          </a>
+        </li>
+      {%- endif -%}
+
+    </ul>
+  </nav>
+{%- endif -%}
+
+<style>
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-8) 0;
+}
+
+.pagination__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+}
+
+.pagination__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 var(--space-3);
+  border: 1.5px solid #D1D5DB;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-medium);
+  text-decoration: none;
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+  gap: var(--space-1);
+}
+
+.pagination__link:hover {
+  border-color: var(--color-green);
+  color: var(--color-green);
+  background-color: var(--color-pale);
+}
+
+.pagination__link--current {
+  background-color: var(--color-green);
+  border-color: var(--color-green);
+  color: white;
+  cursor: default;
+}
+
+.pagination__link--arrow {
+  gap: var(--space-2);
+}
+
+.pagination__link--arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pagination__ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 40px;
+  color: var(--color-text-light);
+}
+</style>
