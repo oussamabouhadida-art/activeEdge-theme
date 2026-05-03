@@ -26,6 +26,15 @@
     <meta name="robots" content="noindex, nofollow">
   {%- endif -%}
 
+  <!-- Anti-flash: apply theme before paint -->
+  <script>
+    (function(){
+      var t=localStorage.getItem('activeedge-theme')||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',t);
+    })();
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +49,7 @@
   {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
   {{ 'component-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-footer.css' | asset_url | stylesheet_tag }}
+  {{ 'theme-dark.css' | asset_url | stylesheet_tag }}
 
   <!-- Inline CSS custom properties from theme settings -->
   <style>
@@ -79,6 +89,7 @@
   <script src="{{ 'product-form.js' | asset_url }}" defer></script>
   <script src="{{ 'search.js' | asset_url }}" defer></script>
   <script src="{{ 'animations.js' | asset_url }}" defer></script>
+  <script src="{{ 'theme-toggle.js' | asset_url }}" defer></script>
 
 </body>
 </html>
