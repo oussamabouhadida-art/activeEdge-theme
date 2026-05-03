@@ -339,3 +339,156 @@ window.ActiveEdge.Overlay = Overlay;
 window.ActiveEdge.bumpCartCount = bumpCartCount;
 window.ActiveEdge.trapFocus = trapFocus;
 window.ActiveEdge.removeTrapFocus = removeTrapFocus;
+
+/* ============================================
+   Quick Add — product card "+" button
+   ============================================ */
+class QuickAdd {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    // Delegated click on all quick-add buttons
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.product-card__quick-add-btn');
+      if (!btn) return;
+
+      e.preventDefault();
+      const variantId = btn.dataset.variantId;
+      if (!variantId) return;
+
+      this.addToCart(btn, variantId);
+    });
+  }
+
+  async addToCart(btn, variantId) {
+    if (btn.disabled) return;
+
+    const originalHtml = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M2 12h20"/><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></svg>';
+
+    try {
+      const response = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+        body: JSON.stringify({ id: variantId, quantity: 1 })
+      });
+
+      if (!response.ok) throw new Error('Add to cart failed');
+
+      const item = await response.json();
+
+      // Dispatch event for cart drawer to handle
+      document.dispatchEvent(new CustomEvent('cart:add', { detail: { id: variantId, quantity: 1 } }));
+
+      // Show success state briefly
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Ajouté';
+      btn.style.background = 'var(--color-mid)';
+
+      setTimeout(() => {
+        btn.innerHTML = originalHtml;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 1800);
+
+    } catch (err) {
+      console.error('Quick add error:', err);
+      btn.innerHTML = originalHtml;
+      btn.disabled = false;
+    }
+  }
+}
+
+/* ============================================
+   Product Carousel — nav buttons + dots
+   ============================================ */
+class ProductCarousel {
+  constructor(container) {
+    this.container = container;
+    this.track = container.querySelector('.product-carousel__track');
+    this.items = container.querySelectorAll('.product-carousel__item');
+    this.prevBtn = container.querySelector('.product-carousel__btn--prev');
+    this.nextBtn = container.querySelector('.product-carousel__btn--next');
+    this.dotsContainer = container.querySelector('.product-carousel__dots');
+
+    if (!this.track || !this.items.length) return;
+    this.currentIndex = 0;
+    this.init();
+  }
+
+  init() {
+    // Build dots
+    if (this.dotsContainer && this.items.length > 1) {
+      this.items.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = `product-carousel__dot${i === 0 ? ' active' : ''}`;
+        dot.setAttribute('aria-label', `Slide ${i + 1}`);
+        dot.addEventListener('click', () => this.goTo(i));
+        this.dotsContainer.appendChild(dot);
+      });
+    }
+
+    if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev());
+    if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next());
+
+    // Update on scroll
+    this.track.addEventListener('scroll', debounce(() => this.onScroll(), 80), { passive: true });
+  }
+
+  getVisibleCount() {
+    const containerW = this.track.clientWidth;
+    const itemW = this.items[0] ? this.items[0].clientWidth : 0;
+    return itemW > 0 ? Math.round(containerW / itemW) : 1;
+  }
+
+  goTo(index) {
+    const item = this.items[index];
+    if (!item) return;
+    item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    this.updateState(index);
+  }
+
+  prev() {
+    const visible = this.getVisibleCount();
+    this.goTo(Math.max(0, this.currentIndex - visible));
+  }
+
+  next() {
+    const visible = this.getVisibleCount();
+    this.goTo(Math.min(this.items.length - 1, this.currentIndex + visible));
+  }
+
+  onScroll() {
+    const scrollLeft = this.track.scrollLeft;
+    const itemW = this.items[0] ? this.items[0].clientWidth + 20 : 1;
+    const index = Math.round(scrollLeft / itemW);
+    this.updateState(index);
+  }
+
+  updateState(index) {
+    this.currentIndex = index;
+
+    // Update dots
+    if (this.dotsContainer) {
+      this.dotsContainer.querySelectorAll('.product-carousel__dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    // Update buttons
+    if (this.prevBtn) this.prevBtn.disabled = index === 0;
+    if (this.nextBtn) this.nextBtn.disabled = index >= this.items.length - this.getVisibleCount();
+  }
+}
+
+/* ============================================
+   Init QuickAdd + Carousels on DOM Ready
+   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  new QuickAdd();
+
+  // Init all carousels
+  document.querySelectorAll('.product-carousel').forEach(el => new ProductCarousel(el));
+});
