@@ -1,0 +1,77 @@
+<section class="section-404 page-width">
+  <div class="section-404__inner">
+    <div class="section-404__icon" aria-hidden="true">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="38" stroke="var(--color-mid)" stroke-width="2"/>
+        <text x="40" y="52" text-anchor="middle" font-family="var(--font-heading)" font-size="28" font-weight="700" fill="var(--color-green)">404</text>
+      </svg>
+    </div>
+    <h1 class="section-404__title">{{ section.settings.heading | default: '404' | t: default: section.settings.heading }}</h1>
+    <p class="section-404__subtitle">{{ section.settings.subheading }}</p>
+    <a href="{{ routes.root_url }}" class="btn btn--primary btn--large">
+      {{ section.settings.cta_label }}
+    </a>
+  </div>
+</section>
+
+<style>
+.section-404 {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--section-padding) var(--container-padding);
+  text-align: center;
+}
+.section-404__inner {
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+.section-404__icon { color: var(--color-mid); }
+.section-404__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-green);
+}
+.section-404__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-medium);
+  line-height: var(--line-height-relaxed);
+}
+</style>
+
+{% schema %}
+{
+  "name": "Page 404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Page introuvable"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sous-titre",
+      "default": "La page que tu cherches n'existe pas ou a été déplacée."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texte du bouton",
+      "default": "Retour à l'accueil"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page 404"
+    }
+  ]
+}
+{% endschema %}

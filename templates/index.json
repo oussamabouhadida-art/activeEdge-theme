@@ -1,0 +1,87 @@
+{
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "message": "🌿 Livraison offerte dès 35 € — France & Europe",
+        "background_color": "#2D6A4F",
+        "text_color": "#FFFFFF"
+      }
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Bouge libre.",
+        "subheading": "Des accessoires pensés pour ton quotidien actif.",
+        "eyebrow": "Nouvelle collection",
+        "cta_label": "Découvrir la collection",
+        "cta_secondary_label": "Notre histoire",
+        "overlay_opacity": 35,
+        "min_height": 650,
+        "full_height": false,
+        "content_alignment": "left"
+      }
+    },
+    "featured-categories": {
+      "type": "featured-categories",
+      "settings": {
+        "heading": "Nos univers",
+        "subheading": "Des accessoires pour chaque moment de ton quotidien actif."
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Nos best-sellers",
+        "subheading": "Les accessoires préférés de la communauté ActiveEdge.",
+        "products_per_row": 4,
+        "show_view_all": true
+      }
+    },
+    "why-activeedge": {
+      "type": "why-activeedge",
+      "settings": {
+        "heading": "Pourquoi ActiveEdge ?",
+        "subheading": "Des produits pensés pour bouger léger au quotidien."
+      }
+    },
+    "lifestyle-split": {
+      "type": "lifestyle-split",
+      "settings": {
+        "heading": "Le mouvement, au quotidien",
+        "text": "ActiveEdge est né d'une conviction simple : bouger mieux ne devrait pas être compliqué. Nos accessoires s'intègrent naturellement dans ta vie — running matinal, trajet urbain, séance de récup. Légers, pensés, avec toi.",
+        "cta_label": "Notre histoire",
+        "image_position": "right"
+      }
+    },
+    "social-proof": {
+      "type": "social-proof",
+      "settings": {
+        "heading": "Ils bougent avec ActiveEdge",
+        "subheading": "Des milliers de clients actifs font confiance à nos accessoires."
+      }
+    },
+    "trust-bar": {
+      "type": "trust-bar",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Rejoins la communauté ActiveEdge",
+        "subheading": "Conseils mouvement, nouveautés et offres exclusives — directement dans ta boîte mail."
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "hero",
+    "featured-categories",
+    "featured-collection",
+    "why-activeedge",
+    "lifestyle-split",
+    "social-proof",
+    "trust-bar",
+    "newsletter"
+  ]
+}

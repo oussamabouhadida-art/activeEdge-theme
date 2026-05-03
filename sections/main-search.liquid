@@ -1,0 +1,139 @@
+<section class="section-search page-width" id="main-search">
+  <div class="section-search__header">
+    <h1 class="section-search__title">{{ 'search.title' | t }}</h1>
+
+    <form action="{{ routes.search_url }}" method="get" class="section-search__form" role="search">
+      <input type="hidden" name="type" value="product">
+      <div class="section-search__input-wrap">
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'search.placeholder' | t }}"
+          class="section-search__input"
+          aria-label="{{ 'search.placeholder' | t }}"
+          autocomplete="off"
+        >
+        <button type="submit" class="section-search__submit btn btn--primary" aria-label="{{ 'general.search.search' | t }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  {%- if search.performed -%}
+    <div class="section-search__results">
+      {%- if search.results_count > 0 -%}
+        <p class="section-search__count">
+          {{ 'search.results_count' | t: count: search.results_count, terms: search.terms }}
+        </p>
+        <div class="product-grid product-grid--4">
+          {%- for result in search.results -%}
+            {%- if result.object_type == 'product' -%}
+              {%- render 'product-card', product: result, show_quick_add: true -%}
+            {%- else -%}
+              <article class="search-result-card">
+                <a href="{{ result.url }}" class="search-result-card__link">
+                  <h3 class="search-result-card__title">{{ result.title }}</h3>
+                  {%- if result.description != blank -%}
+                    <p class="search-result-card__excerpt">{{ result.description | strip_html | truncate: 120 }}</p>
+                  {%- endif -%}
+                </a>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- render 'pagination', paginate: paginate -%}
+      {%- else -%}
+        <div class="section-search__no-results">
+          <p>{{ 'search.no_results' | t: terms: search.terms }}</p>
+          <p class="section-search__suggestions">{{ 'search.suggestions' | t }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+.section-search {
+  padding: var(--section-padding) var(--container-padding);
+}
+.section-search__header {
+  max-width: 640px;
+  margin: 0 auto var(--space-12);
+  text-align: center;
+}
+.section-search__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-green);
+  margin-bottom: var(--space-6);
+}
+.section-search__input-wrap {
+  display: flex;
+  gap: var(--space-2);
+}
+.section-search__input {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  border: 2px solid var(--color-mint);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-base);
+  outline: none;
+  transition: border-color var(--transition);
+}
+.section-search__input:focus { border-color: var(--color-mid); }
+.section-search__submit {
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-5);
+}
+.section-search__count {
+  margin-bottom: var(--space-8);
+  color: var(--color-text-medium);
+}
+.section-search__no-results {
+  text-align: center;
+  padding: var(--space-16) 0;
+}
+.section-search__suggestions {
+  color: var(--color-text-medium);
+  margin-top: var(--space-4);
+}
+.search-result-card {
+  background: var(--color-pale);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.search-result-card__link {
+  display: block;
+  padding: var(--space-6);
+  text-decoration: none;
+  color: inherit;
+}
+.search-result-card__title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-green);
+  margin-bottom: var(--space-2);
+}
+.search-result-card__excerpt {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-medium);
+  line-height: var(--line-height-relaxed);
+}
+</style>
+
+{% schema %}
+{
+  "name": "Résultats de recherche",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Résultats de recherche"
+    }
+  ]
+}
+{% endschema %}

@@ -3,7 +3,10 @@
     "continue_shopping": "Continuer mes achats",
     "close": "Fermer",
     "loading": "Chargement...",
-    "search": "Rechercher",
+    "search": {
+      "search": "Rechercher",
+      "placeholder": "Rechercher un produit..."
+    },
     "submit": "Envoyer",
     "view_all": "Voir tout",
     "meta": {
@@ -17,13 +20,6 @@
     "current_page": "Page courante",
     "breadcrumbs": "Fil d'Ariane",
     "breadcrumbs_home": "Accueil",
-    "minus": "moins",
-    "plus": "plus",
-    "search": {
-      "search": "Rechercher",
-      "placeholder": "Rechercher un produit..."
-    },
-    "close": "Fermer",
     "minus": "moins",
     "plus": "plus"
   },
@@ -142,7 +138,8 @@
     "placeholder": "Que cherchez-vous ?",
     "no_results": "Aucun résultat pour \"{{ terms }}\"",
     "results_count": "{{ count }} résultat pour \"{{ terms }}\"",
-    "results_count_plural": "{{ count }} résultats pour \"{{ terms }}\""
+    "results_count_plural": "{{ count }} résultats pour \"{{ terms }}\"",
+    "suggestions": "Essayez d’autres mots-clés ou parcourez nos collections."
   },
   "blog": {
     "read_more": "Lire la suite",

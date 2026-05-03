@@ -3,7 +3,10 @@
     "continue_shopping": "Continue shopping",
     "close": "Close",
     "loading": "Loading...",
-    "search": "Search",
+    "search": {
+      "search": "Search",
+      "placeholder": "Search for a product..."
+    },
     "submit": "Submit",
     "view_all": "View all",
     "meta": {
@@ -18,12 +21,7 @@
     "breadcrumbs": "Breadcrumb",
     "breadcrumbs_home": "Home",
     "minus": "minus",
-    "plus": "plus",
-    "search": {
-      "search": "Search",
-      "placeholder": "Search for a product..."
-    },
-    "close": "Close"
+    "plus": "plus"
   },
   "accessibility": {
     "skip_to_content": "Skip to main content"
@@ -140,7 +138,8 @@
     "placeholder": "What are you looking for?",
     "no_results": "No results for \"{{ terms }}\"",
     "results_count": "{{ count }} result for \"{{ terms }}\"",
-    "results_count_plural": "{{ count }} results for \"{{ terms }}\""
+    "results_count_plural": "{{ count }} results for \"{{ terms }}\"",
+    "suggestions": "Try different keywords or browse our collections."
   },
   "blog": {
     "read_more": "Read more",
