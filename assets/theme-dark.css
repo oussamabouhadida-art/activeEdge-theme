@@ -395,3 +395,438 @@
 
 [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* ================================================
+   DARK MODE PATCH — Cart, Product, Cards, RTE
+   ================================================ */
+
+/* ── Cart drawer ──────────────────────────────── */
+[data-theme="dark"] .cart-drawer {
+  background: #0A0F1E;
+}
+
+[data-theme="dark"] .cart-drawer__header {
+  border-bottom-color: rgba(56,189,248,0.1);
+}
+
+[data-theme="dark"] .cart-drawer__title { color: #E2E8F0; }
+
+[data-theme="dark"] .cart-drawer__count {
+  background: #1E3A5F;
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .cart-drawer__close {
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .cart-drawer__close:hover {
+  background: #1E3A5F;
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .cart-item {
+  border-bottom-color: rgba(56,189,248,0.08);
+}
+
+[data-theme="dark"] .cart-item__image-wrap {
+  background: #111827;
+}
+
+[data-theme="dark"] .cart-item__title { color: #E2E8F0; }
+[data-theme="dark"] .cart-item__title:hover { color: #38BDF8; }
+[data-theme="dark"] .cart-item__variant { color: #64748B; }
+[data-theme="dark"] .cart-item__price { color: #E2E8F0; }
+[data-theme="dark"] .cart-item__price--compare { color: #475569; }
+
+[data-theme="dark"] .cart-item__qty-wrap {
+  border-color: rgba(56,189,248,0.2);
+  background: #111827;
+}
+
+[data-theme="dark"] .cart-item__qty-btn {
+  color: #CBD5E1;
+  background: transparent;
+}
+
+[data-theme="dark"] .cart-item__qty-btn:hover {
+  background: #1E3A5F;
+}
+
+[data-theme="dark"] .cart-item__qty-input {
+  background: #111827;
+  color: #E2E8F0;
+  border-left-color: rgba(56,189,248,0.2);
+  border-right-color: rgba(56,189,248,0.2);
+}
+
+[data-theme="dark"] .cart-item__remove {
+  color: #475569;
+}
+
+[data-theme="dark"] .cart-drawer__footer {
+  background: #0A0F1E;
+  border-top-color: rgba(56,189,248,0.1);
+}
+
+[data-theme="dark"] .cart-drawer__subtotal { color: #E2E8F0; }
+
+[data-theme="dark"] .cart-drawer__shipping-note {
+  background: #111827;
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .cart-drawer__shipping-note span {
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .cart-drawer__continue {
+  color: #64748B;
+}
+
+[data-theme="dark"] .cart-drawer__continue:hover {
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .cart-drawer__empty-icon { color: #1E3A5F; }
+[data-theme="dark"] .cart-drawer__empty-title { color: #E2E8F0; }
+[data-theme="dark"] .cart-drawer__empty-text { color: #64748B; }
+
+[data-theme="dark"] .cart-drawer__loader {
+  background: rgba(7,11,20,0.75);
+}
+
+/* ── Product page ─────────────────────────────── */
+[data-theme="dark"] .product-gallery__main,
+[data-theme="dark"] .product-gallery__thumb {
+  background: #111827;
+}
+
+[data-theme="dark"] .product-gallery__thumb:hover {
+  border-color: #38BDF8;
+}
+
+[data-theme="dark"] .product-gallery__thumb.active {
+  border-color: #2563EB;
+}
+
+[data-theme="dark"] .product-info__vendor { color: #475569; }
+[data-theme="dark"] .product-info__title { color: #E2E8F0; }
+[data-theme="dark"] .product-info__rating { color: #94A3B8; }
+[data-theme="dark"] .product-info__rating-count { color: #475569; }
+
+[data-theme="dark"] .price__regular { color: #E2E8F0; }
+[data-theme="dark"] .price__compare { color: #475569; }
+[data-theme="dark"] .price__savings {
+  background: rgba(239,68,68,0.15);
+  color: #FCA5A5;
+}
+
+[data-theme="dark"] .product-form__option-label { color: #E2E8F0; }
+
+[data-theme="dark"] .product-form__option-btn {
+  border-color: rgba(56,189,248,0.2);
+  color: #94A3B8;
+  background: #111827;
+}
+
+[data-theme="dark"] .product-form__option-btn:hover {
+  border-color: #38BDF8;
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .product-form__option-btn.active {
+  border-color: #2563EB;
+  color: #60A5FA;
+  background: #1E3A5F;
+}
+
+[data-theme="dark"] .product-form__option-btn--swatch.active {
+  box-shadow: 0 0 0 2px #070B14, 0 0 0 4px #2563EB;
+}
+
+[data-theme="dark"] .product-form__qty-label { color: #E2E8F0; }
+
+[data-theme="dark"] .product-form__trust-item {
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .product-form__trust-item svg {
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .product-accordions {
+  border-top-color: rgba(56,189,248,0.1);
+}
+
+[data-theme="dark"] .accordion {
+  border-bottom-color: rgba(56,189,248,0.1);
+}
+
+[data-theme="dark"] .accordion__toggle {
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .accordion__toggle:hover {
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .accordion__toggle svg {
+  color: #64748B;
+}
+
+[data-theme="dark"] .accordion__content {
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .sticky-atc {
+  background: #0A0F1E;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.6);
+  border-top: 1px solid rgba(56,189,248,0.1);
+}
+
+[data-theme="dark"] .sticky-atc__title { color: #E2E8F0; }
+
+/* ── Product cards ────────────────────────────── */
+[data-theme="dark"] .product-card {
+  background: #111827;
+}
+
+[data-theme="dark"] .product-card__badge--eco {
+  background: #1E3A5F;
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .product-card__badge--bestseller {
+  background: #1E3A5F;
+  color: #60A5FA;
+}
+
+[data-theme="dark"] .product-card__badge--new {
+  background: #1D4ED8;
+  color: #fff;
+}
+
+[data-theme="dark"] .product-card__vendor { color: #475569; }
+[data-theme="dark"] .product-card__title { color: #E2E8F0; }
+[data-theme="dark"] .product-card__price { color: #E2E8F0; }
+[data-theme="dark"] .product-card__price--compare { color: #475569; }
+[data-theme="dark"] .product-card__rating-text { color: #475569; }
+
+[data-theme="dark"] .product-card__quick-add-btn {
+  background: #2563EB;
+  color: #fff;
+}
+
+[data-theme="dark"] .product-card__quick-add-btn:hover {
+  background: #1D4ED8;
+}
+
+/* ── RTE — policy pages, articles ────────────── */
+[data-theme="dark"] .rte { color: #CBD5E1; }
+
+[data-theme="dark"] .rte h1,
+[data-theme="dark"] .rte h2,
+[data-theme="dark"] .rte h3,
+[data-theme="dark"] .rte h4 {
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .rte a {
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .rte a:hover {
+  color: #60A5FA;
+}
+
+[data-theme="dark"] .rte strong { color: #E2E8F0; }
+
+[data-theme="dark"] .rte blockquote {
+  border-left-color: #2563EB;
+  background: #111827;
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .rte hr {
+  border-color: rgba(56,189,248,0.15);
+}
+
+[data-theme="dark"] .rte table th {
+  background: #111827;
+  color: #E2E8F0;
+  border-color: rgba(56,189,248,0.15);
+}
+
+[data-theme="dark"] .rte table td {
+  border-color: rgba(56,189,248,0.08);
+  color: #CBD5E1;
+}
+
+[data-theme="dark"] .rte table tr:nth-child(even) td {
+  background: #0A0F1E;
+}
+
+[data-theme="dark"] .rte code,
+[data-theme="dark"] .rte pre {
+  background: #111827;
+  color: #38BDF8;
+  border-color: rgba(56,189,248,0.15);
+}
+
+/* ── Pagination ───────────────────────────────── */
+[data-theme="dark"] .pagination__item a,
+[data-theme="dark"] .pagination__item span {
+  background: #111827;
+  color: #94A3B8;
+  border-color: rgba(56,189,248,0.15);
+}
+
+[data-theme="dark"] .pagination__item--active a,
+[data-theme="dark"] .pagination__item--active span {
+  background: #2563EB;
+  color: #fff;
+  border-color: #2563EB;
+}
+
+[data-theme="dark"] .pagination__item a:hover {
+  background: #1E3A5F;
+  color: #38BDF8;
+  border-color: #38BDF8;
+}
+
+/* ── Breadcrumb ───────────────────────────────── */
+[data-theme="dark"] .breadcrumb { color: #475569; }
+[data-theme="dark"] .breadcrumb a { color: #64748B; }
+[data-theme="dark"] .breadcrumb a:hover { color: #38BDF8; }
+
+/* ── Mobile nav ───────────────────────────────── */
+[data-theme="dark"] .mobile-nav {
+  background: #0A0F1E;
+}
+
+[data-theme="dark"] .mobile-nav__header {
+  border-bottom-color: rgba(56,189,248,0.1);
+}
+
+[data-theme="dark"] .mobile-nav__title { color: #E2E8F0; }
+
+[data-theme="dark"] .mobile-nav__close {
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .mobile-nav__close:hover {
+  background: #1E3A5F;
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .mobile-nav__item {
+  border-bottom-color: rgba(56,189,248,0.06);
+}
+
+[data-theme="dark"] .mobile-nav__link {
+  color: #CBD5E1;
+}
+
+[data-theme="dark"] .mobile-nav__link:hover,
+[data-theme="dark"] .mobile-nav__link.active {
+  background: #1E3A5F;
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .mobile-nav__sub {
+  background: #070B14;
+}
+
+[data-theme="dark"] .mobile-nav__sub-link {
+  color: #64748B;
+}
+
+[data-theme="dark"] .mobile-nav__sub-link:hover {
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .mobile-nav__footer {
+  border-top-color: rgba(56,189,248,0.1);
+}
+
+/* ── Blog ─────────────────────────────────────── */
+[data-theme="dark"] .blog-card {
+  background: #111827;
+}
+
+[data-theme="dark"] .blog-card__title-link { color: #E2E8F0; }
+[data-theme="dark"] .blog-card__title-link:hover { color: #38BDF8; }
+[data-theme="dark"] .blog-card__excerpt { color: #64748B; }
+[data-theme="dark"] .blog-card__meta { color: #475569; }
+[data-theme="dark"] .blog-card__cta { color: #38BDF8; }
+[data-theme="dark"] .blog-card__tag {
+  background: #1E3A5F;
+  color: #60A5FA;
+}
+
+/* ── Article page ─────────────────────────────── */
+[data-theme="dark"] .article-page__title { color: #E2E8F0; }
+[data-theme="dark"] .article-page__meta { color: #475569; }
+[data-theme="dark"] .article-page__tag {
+  background: #1E3A5F;
+  color: #60A5FA;
+}
+
+[data-theme="dark"] .article-page__tag:hover {
+  background: #2563EB;
+  color: #fff;
+}
+
+[data-theme="dark"] .article-page__share {
+  border-top-color: rgba(56,189,248,0.1);
+}
+
+[data-theme="dark"] .article-page__nav {
+  border-top-color: rgba(56,189,248,0.1);
+}
+
+[data-theme="dark"] .article-comment {
+  border-bottom-color: rgba(56,189,248,0.08);
+}
+
+[data-theme="dark"] .article-comment__author { color: #38BDF8; }
+[data-theme="dark"] .article-comment__date { color: #475569; }
+[data-theme="dark"] .article-comment__body { color: #CBD5E1; }
+
+/* ── Customer pages ───────────────────────────── */
+[data-theme="dark"] .customer-form-wrapper h1 { color: #E2E8F0; }
+
+[data-theme="dark"] .orders-table th {
+  color: #64748B;
+  border-bottom-color: rgba(56,189,248,0.15);
+}
+
+[data-theme="dark"] .orders-table td {
+  color: #CBD5E1;
+  border-bottom-color: rgba(56,189,248,0.06);
+}
+
+[data-theme="dark"] .orders-table tr:hover td {
+  background: #111827;
+}
+
+[data-theme="dark"] .account-header {
+  border-bottom-color: rgba(56,189,248,0.1);
+}
+
+[data-theme="dark"] .account-details {
+  background: #111827;
+}
+
+[data-theme="dark"] .account-empty { color: #64748B; }
+
+/* ── Section Blog / Search ────────────────────── */
+[data-theme="dark"] .section-blog__title,
+[data-theme="dark"] .section-blog__desc { color: #94A3B8; }
+
+[data-theme="dark"] .section-search__title { color: #E2E8F0; }
+
+/* ── 404 ──────────────────────────────────────── */
+[data-theme="dark"] .section-404__title { color: #60A5FA; }
+[data-theme="dark"] .section-404__subtitle { color: #64748B; }
