@@ -1,6 +1,6 @@
 <section class="featured-collection section-padding">
   <div class="page-width">
-    <div class="section-header section-header--with-cta">
+    <div class="section-header section-header--with-cta" data-reveal="fade-up">
       <div>
         {%- if section.settings.heading != blank -%}
           <h2 class="section-title">{{ section.settings.heading }}</h2>
@@ -9,41 +9,63 @@
           <p class="section-subtitle">{{ section.settings.subheading }}</p>
         {%- endif -%}
       </div>
-      {%- if section.settings.collection != blank and section.settings.show_view_all -%}
-        <a href="{{ collections[section.settings.collection].url }}" class="btn btn--outline">
+      {%- if section.settings.show_view_all -%}
+        {%- assign view_url = section.settings.collection != blank | default: '/collections/all' -%}
+        <a href="{{ collections[section.settings.collection].url | default: '/collections/all' }}" class="btn btn--outline">
           {{ 'sections.featured_collection.view_all' | t }}
         </a>
       {%- endif -%}
     </div>
 
-    {%- assign collection = collections[section.settings.collection] -%}
-    {%- if collection != blank -%}
-      <div class="product-carousel">
-        <div class="product-carousel__track" id="product-carousel-track">
-          {%- for product in collection.products limit: section.settings.products_count -%}
+    {%- assign featured_collection = collections[section.settings.collection] -%}
+    {%- assign show_products = false -%}
+    {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+      {%- assign show_products = true -%}
+    {%- endif -%}
+
+    <div class="product-carousel" data-reveal-stagger=".product-carousel__item" data-reveal-step="60">
+      <div class="product-carousel__track">
+
+        {%- if show_products -%}
+          {%- for product in featured_collection.products limit: section.settings.products_count -%}
             <div class="product-carousel__item">
               {%- render 'product-card', product: product, show_quick_add: section.settings.show_quick_add -%}
             </div>
           {%- endfor -%}
-        </div>
-      </div>
-    {%- else -%}
-      <div class="product-carousel">
-        <div class="product-carousel__track">
-          {%- for i in (1..4) -%}
-            <div class="product-carousel__item product-card product-card--placeholder">
-              <div class="product-card__image-wrap">
-                <div class="product-card__image-placeholder"></div>
-              </div>
-              <div class="product-card__info">
-                <p class="product-card__title">{{ 'sections.featured_collection.onboarding_title' | t }}</p>
-                <p class="product-card__price">—</p>
+
+        {%- else -%}
+          {%- for i in (1..section.settings.products_count) -%}
+            <div class="product-carousel__item">
+              <div class="product-card product-card--placeholder">
+                <div class="product-card__image-wrap">
+                  <div class="product-card__image-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6M15 9l-6 6"/></svg>
+                  </div>
+                </div>
+                <div class="product-card__info">
+                  <p class="product-card__vendor">ActiveEdge</p>
+                  <p class="product-card__title">{{ 'sections.featured_collection.onboarding_title' | t }}</p>
+                  <p class="product-card__price">29,90 €</p>
+                </div>
               </div>
             </div>
           {%- endfor -%}
-        </div>
+        {%- endif -%}
+
       </div>
-    {%- endif -%}
+
+      {%- if show_products and featured_collection.products_count > 1 -%}
+        <div class="product-carousel__controls">
+          <button class="product-carousel__btn product-carousel__btn--prev" aria-label="{{ 'accessibility.previous' | t }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="product-carousel__dots"></div>
+          <button class="product-carousel__btn product-carousel__btn--next" aria-label="{{ 'accessibility.next' | t }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 </section>
 

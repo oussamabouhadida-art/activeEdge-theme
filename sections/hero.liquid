@@ -39,25 +39,25 @@
   <div class="hero__content page-width">
     <div class="hero__text hero__text--{{ section.settings.content_alignment }}">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="hero__eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="hero__eyebrow" data-reveal="fade-up" data-reveal-delay="0">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
 
       {%- if section.settings.heading != blank -%}
-        <h1 class="hero__heading">{{ section.settings.heading }}</h1>
+        <h1 class="hero__heading" data-reveal="fade-up" data-reveal-delay="100">{{ section.settings.heading }}</h1>
       {%- endif -%}
 
       {%- if section.settings.subheading != blank -%}
-        <p class="hero__subheading">{{ section.settings.subheading }}</p>
+        <p class="hero__subheading" data-reveal="fade-up" data-reveal-delay="200">{{ section.settings.subheading }}</p>
       {%- endif -%}
 
-      <div class="hero__ctas">
-        {%- if section.settings.cta_label != blank and section.settings.cta_url != blank -%}
-          <a href="{{ section.settings.cta_url }}" class="btn btn--primary btn--large hero__cta">
+      <div class="hero__ctas" data-reveal="fade-up" data-reveal-delay="320">
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn btn--primary btn--large hero__cta btn--magnetic">
             {{ section.settings.cta_label }}
           </a>
         {%- endif -%}
-        {%- if section.settings.cta_secondary_label != blank and section.settings.cta_secondary_url != blank -%}
-          <a href="{{ section.settings.cta_secondary_url }}" class="btn btn--outline-white btn--large hero__cta">
+        {%- if section.settings.cta_secondary_label != blank -%}
+          <a href="{{ section.settings.cta_secondary_url | default: '/pages/about' }}" class="btn btn--outline-white btn--large hero__cta">
             {{ section.settings.cta_secondary_label }}
           </a>
         {%- endif -%}

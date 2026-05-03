@@ -6,7 +6,7 @@
         <text x="40" y="52" text-anchor="middle" font-family="var(--font-heading)" font-size="28" font-weight="700" fill="var(--color-green)">404</text>
       </svg>
     </div>
-    <h1 class="section-404__title">{{ section.settings.heading | default: '404' | t: default: section.settings.heading }}</h1>
+    <h1 class="section-404__title">{{ section.settings.heading }}</h1>
     <p class="section-404__subtitle">{{ section.settings.subheading }}</p>
     <a href="{{ routes.root_url }}" class="btn btn--primary btn--large">
       {{ section.settings.cta_label }}

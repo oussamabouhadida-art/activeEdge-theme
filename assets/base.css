@@ -749,3 +749,62 @@ input[type="radio"] {
 @media (min-width: 1280px) {
   /* Extra wide layouts */
 }
+
+/* ============================================
+   Scroll Reveal Animations
+   ============================================ */
+
+/* Base state — hidden before reveal */
+.will-reveal {
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.will-reveal--fade-up    { opacity: 0; transform: translateY(32px); }
+.will-reveal--fade-in    { opacity: 0; transform: none; }
+.will-reveal--slide-left { opacity: 0; transform: translateX(40px); }
+.will-reveal--slide-right{ opacity: 0; transform: translateX(-40px); }
+.will-reveal--scale      { opacity: 0; transform: scale(0.92); }
+
+/* Revealed state */
+.is-revealed {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .will-reveal { opacity: 1 !important; transform: none !important; transition: none; }
+}
+
+/* ============================================
+   Hero placeholder gradient (no image set)
+   ============================================ */
+.hero__placeholder-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-forest) 0%, #2D6A4F 45%, #1a3a2a 100%);
+}
+
+.hero__placeholder-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 50%, rgba(82,183,136,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(116,198,157,0.12) 0%, transparent 60%);
+}
+
+/* ============================================
+   Micro-interactions
+   ============================================ */
+
+/* Smooth image zoom on card hover */
+.product-card:hover .product-card__img { transform: scale(1.04); }
+
+/* Focus ring — brand colored */
+:focus-visible {
+  outline: 2px solid var(--color-mid);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

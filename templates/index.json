@@ -15,9 +15,11 @@
         "subheading": "Des accessoires pensés pour ton quotidien actif.",
         "eyebrow": "Nouvelle collection",
         "cta_label": "Découvrir la collection",
+        "cta_url": "/collections/all",
         "cta_secondary_label": "Notre histoire",
-        "overlay_opacity": 35,
-        "min_height": 650,
+        "cta_secondary_url": "/pages/about",
+        "overlay_opacity": 30,
+        "min_height": 680,
         "full_height": false,
         "content_alignment": "left"
       }
@@ -34,6 +36,7 @@
       "settings": {
         "heading": "Nos best-sellers",
         "subheading": "Les accessoires préférés de la communauté ActiveEdge.",
+        "collection": "all",
         "products_per_row": 4,
         "show_view_all": true
       }
@@ -51,6 +54,7 @@
         "heading": "Le mouvement, au quotidien",
         "text": "ActiveEdge est né d'une conviction simple : bouger mieux ne devrait pas être compliqué. Nos accessoires s'intègrent naturellement dans ta vie — running matinal, trajet urbain, séance de récup. Légers, pensés, avec toi.",
         "cta_label": "Notre histoire",
+        "cta_url": "/pages/about",
         "image_position": "right"
       }
     },

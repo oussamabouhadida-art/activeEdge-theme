@@ -18,7 +18,7 @@
       </div>
     {%- endif -%}
 
-    <div class="social-proof__grid">
+    <div class="social-proof__grid" data-reveal-stagger=".social-proof__card" data-reveal-step="100">
       {%- for block in section.blocks -%}
         <div class="social-proof__card" {{ block.shopify_attributes }}>
           <div class="social-proof__card-stars">
